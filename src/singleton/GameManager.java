@@ -247,23 +247,23 @@ public final class GameManager {
       
       // Instance field
       
-      private FloatCounter _cash;
+      private DoubleCounter _cash;
       
       // Constructor
       
-      public Wallet(float defaultCash) {      
-        setCash(new FloatCounter(defaultCash, 100000.0));
+      public Wallet(double defaultCash) {      
+        setCash(new DoubleCounter(defaultCash, 100000.0));
       }
       
       // Getters
       
-      public FloatCounter getCash() {
+      public DoubleCounter getCash() {
         return this._cash;
       }
       
       // Setters
       
-      private void setCash(FloatCounter value) {
+      private void setCash(DoubleCounter value) {
         this._cash = value;
       }
       

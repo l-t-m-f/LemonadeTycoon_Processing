@@ -55,7 +55,7 @@ public class GUI {
         getMainViews().add(view); 
     }
       
-    private void createMainViews(){
+    public void createMainViews(){
       addView(new MainMenuView());
       addView(new GamePreparationView());
       addView(new GameView()); 

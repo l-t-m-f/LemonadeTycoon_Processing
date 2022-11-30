@@ -1,4 +1,7 @@
-abstract class GraphicObject {
+import java.awt.Point;
+import java.awt.Rectangle;
+
+public abstract class GraphicObject {
   
     // Instance fields
     
@@ -34,12 +37,12 @@ abstract class GraphicObject {
       return getGraphicLook().getRectangle();
     }
     
-    public color[] getFillColorInfo() {
-      return getGraphicLook().getFillColorInfo();
+    public int[] getFillintInfo() {
+      return getGraphicLook().getFillintInfo();
     }
     
-    public color[] getBorderColorInfo() {
-      return getGraphicLook().getBorderColorInfo();
+    public int[] getBorderintInfo() {
+      return getGraphicLook().getBorderintInfo();
     }
     
     public boolean getHasBorder() {

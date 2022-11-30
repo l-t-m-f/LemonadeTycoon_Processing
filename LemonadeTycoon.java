@@ -1,13 +1,5 @@
-package LemonadeTycoon;
-
 import processing.core.PApplet;
-import src.singleton.GameManager;
-
-import java.awt.*;
-import java.util.*;
-import java.lang.*;
-import java.lang.Class;
-import java.lang.reflect.Modifier;
+import java.util.Objects;
 
 public class LemonadeTycoon extends PApplet {
 
@@ -28,6 +20,9 @@ public class LemonadeTycoon extends PApplet {
 
   @Override
   public void draw() {
+    if(Objects.isNull(gameManager) == false) {
+      //gameManager.
+    }
   }
 
   @Override

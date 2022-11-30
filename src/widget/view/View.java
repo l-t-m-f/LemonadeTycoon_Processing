@@ -1,4 +1,8 @@
-abstract class View extends GraphicObject {
+import java.util.ArrayList;
+
+import java.awt.Point;
+
+public abstract class View extends GraphicObject {
   
     // Instance fields
     
