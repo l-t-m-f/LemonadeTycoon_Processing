@@ -1,3 +1,4 @@
+package src.widget;
 import java.awt.Point;
 import java.awt.Rectangle;
 
@@ -37,12 +38,12 @@ public abstract class GraphicObject {
       return getGraphicLook().getRectangle();
     }
     
-    public int[] getFillintInfo() {
-      return getGraphicLook().getFillintInfo();
+    public int[] getFillColorInfo() {
+      return getGraphicLook().getFillColorInfo();
     }
     
-    public int[] getBorderintInfo() {
-      return getGraphicLook().getBorderintInfo();
+    public int[] getBorderColorInfo() {
+      return getGraphicLook().getBorderColorInfo();
     }
     
     public boolean getHasBorder() {

@@ -1,4 +1,7 @@
-class TextBlock {
+package src.widget.text;
+import java.awt.Point;
+
+public class TextBlock {
   
     // Instance fields
      
@@ -8,7 +11,7 @@ class TextBlock {
     private String _content; // text
     
     private int _caseSize;
-    private color _caseColor;
+    private int _caseColor;
     
     // Constructors
     
@@ -19,7 +22,7 @@ class TextBlock {
       setCaseSize(24);
     }
     
-    public TextBlock(String content, Point position, Point offset, color caseColor) {
+    public TextBlock(String content, Point position, Point offset, int caseColor) {
       setContent(content);
       setPosition(position);
       setCaseColor(caseColor);
@@ -27,7 +30,7 @@ class TextBlock {
       setCaseSize(24);
     }
     
-    public TextBlock(String content, Point position, Point offset, color caseColor, int caseSize) {
+    public TextBlock(String content, Point position, Point offset, int caseColor, int caseSize) {
       setContent(content);
       setPosition(position);
       setCaseColor(caseColor);
@@ -72,7 +75,7 @@ class TextBlock {
       this._caseSize = value;
     }
     
-    public void setCaseColor(color value){
+    public void setCaseColor(int value){
       this._caseColor = value;
     }
     
@@ -83,12 +86,12 @@ class TextBlock {
     // Class methods
     
     public void draw(){
-      noStroke();
-      fill(getCaseColor());
-      textFont(gameManager.getGUI().getFont(1), getCaseSize());
+      GameManager.getSketch().noStroke();
+      GameManager.getSketch().fill(getCaseColor());
+      textFont(GameManager.getSketch().gameManager.getGUI().getFont(1), getCaseSize());
       int placementX = getOffset().x + getPosition().x;
       int placementY = getOffset().y + getPosition().y;
-      text(getContent(), placementX, placementY);
+      GameManager.getSketch().text(getContent(), placementX, placementY);
     }  
      
    }

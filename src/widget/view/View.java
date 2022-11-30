@@ -1,5 +1,6 @@
+package src.widget.view;
 import java.util.ArrayList;
-
+import java.util.Objects;
 import java.awt.Point;
 
 public abstract class View extends GraphicObject {
@@ -154,9 +155,9 @@ public abstract class View extends GraphicObject {
     public void draw() {
       if(getVisibility() == true) {
         refreshTextVariables();
-        noStroke();
-        fill(getFillColorInfo()[0]);
-        rect(getOffset().x + getRectangle().x, getOffset().y + getRectangle().y, getRectangle().width, getRectangle().height);
+        GameManager.getSketch().noStroke();
+        GameManager.getSketch().fill(getFillColorInfo()[0]);
+        GameManager.getSketch().rect(getOffset().x + getRectangle().x, getOffset().y + getRectangle().y, getRectangle().width, getRectangle().height);
         
         if(getSubviews().size() > 0) {
           for(View vw : getSubviews()) {
@@ -253,14 +254,14 @@ public abstract class View extends GraphicObject {
       }
     
       public void draw() {
-        textFont(gameManager.getGUI().getFont(2));
-        fill(255);
+        GameManager.getSketch().textFont(GameManager.getGUI().getFont(2));
+        GameManager.getSketch().fill(255);
         int placementX = getPosition().x + getOffset().x;
         int placementY = getPosition().y + getOffset().y + 20;
-        text(getName(), placementX , placementY);
-        int mouseDiffX = mouseX - getPosition().x - getOffset().x;
-        int mouseDiffY = mouseY - getPosition().y - getOffset().y;
-        text(mouseDiffX + ", " + mouseDiffY, placementX, placementY + CONST.TEXT_INTERLINE);
+        GameManager.getSketch().text(getName(), placementX , placementY);
+        int mouseDiffX = GameManager.getSketch().mouseX - getPosition().x - getOffset().x;
+        int mouseDiffY = GameManager.getSketch().mouseY - getPosition().y - getOffset().y;
+        GameManager.getSketch().text(mouseDiffX + ", " + mouseDiffY, placementX, placementY + LTUtil.Values.TEXT_INTERLINE);
       }  
     }
   }

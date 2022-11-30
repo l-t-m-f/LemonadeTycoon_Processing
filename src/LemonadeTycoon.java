@@ -1,4 +1,11 @@
+package src;
+
+import src.singleton.Singleton;
+import src.singleton.GameManager;
+
 import processing.core.PApplet;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 
 public class LemonadeTycoon extends PApplet {
@@ -15,7 +22,13 @@ public class LemonadeTycoon extends PApplet {
 
   @Override
   public void setup() {
-    gameManager = new GameManager();
+    try {
+      gameManager = Singleton.GetInstance(GameManager.class, new Object[]{this});
+    } catch (InvocationTargetException | InstantiationException | IllegalAccessException | IllegalArgumentException
+        | SecurityException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
   @Override

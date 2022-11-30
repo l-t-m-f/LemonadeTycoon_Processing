@@ -1,3 +1,4 @@
+package src.widget;
 import java.awt.Point;
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -9,8 +10,8 @@ public class GraphicLook {
   private Point _position;
   private Dimension _dimension;
   private Rectangle _rectangle;
-  private int[] _fillintInfo;
-  private int[] _borderintInfo;
+  private int[] _fillColorInfo;
+  private int[] _borderColorInfo;
   private boolean _hasFill;
   private boolean _hasBorder;
 
@@ -18,31 +19,31 @@ public class GraphicLook {
 
   // Constructor - Splash int (no border)
 
-  public GraphicLook(Point pos, Dimension dim, int splashint) {
+  public GraphicLook(Point pos, Dimension dim, int splashColor) {
     setPosition(pos);
     setDimension(dim);
-    setFillintInfo(new int[] { splashint });
-    setBorderintInfo(new int[] { splashint });
+    setFillColorInfo(new int[] { splashColor });
+    setBorderColorInfo(new int[] { splashColor });
     setHasFill(true);
     setHasBorder(false);
     setRectangle(new Rectangle(getPosition(), getDimension()));
   }
 
-  public GraphicLook(Point pos, Dimension dim, int splashint, boolean hasFill) {
+  public GraphicLook(Point pos, Dimension dim, int splashColor, boolean hasFill) {
     setPosition(pos);
     setDimension(dim);
-    setFillintInfo(new int[] { splashint });
-    setBorderintInfo(new int[] { splashint });
+    setFillColorInfo(new int[] { splashColor });
+    setBorderColorInfo(new int[] { splashColor });
     setHasFill(hasFill);
     setHasBorder(false);
     setRectangle(new Rectangle(getPosition(), getDimension()));
   }
 
-  public GraphicLook(Point pos, Dimension dim, int splashint, boolean hasFill, boolean hasBorder) {
+  public GraphicLook(Point pos, Dimension dim, int splashColor, boolean hasFill, boolean hasBorder) {
     setPosition(pos);
     setDimension(dim);
-    setFillintInfo(new int[] { splashint });
-    setBorderintInfo(new int[] { splashint });
+    setFillColorInfo(new int[] { splashColor });
+    setBorderColorInfo(new int[] { splashColor });
     setHasFill(hasFill);
     setHasBorder(hasBorder);
     setRectangle(new Rectangle(getPosition(), getDimension()));
@@ -50,32 +51,32 @@ public class GraphicLook {
 
   // Constructor - Fill/Border int
 
-  public GraphicLook(Point pos, Dimension dim, int[] fillintInfo, int[] borderintInfo) {
+  public GraphicLook(Point pos, Dimension dim, int[] fillColorInfo, int[] borderColorInfo) {
     setPosition(pos);
     setDimension(dim);
-    setFillintInfo(fillintInfo);
-    setBorderintInfo(borderintInfo);
+    setFillColorInfo(fillColorInfo);
+    setBorderColorInfo(borderColorInfo);
     setHasFill(true);
     setHasBorder(true);
     setRectangle(new Rectangle(getPosition(), getDimension()));
   }
 
-  public GraphicLook(Point pos, Dimension dim, int[] fillintInfo, int[] borderintInfo, boolean hasFill) {
+  public GraphicLook(Point pos, Dimension dim, int[] fillColorInfo, int[] borderColorInfo, boolean hasFill) {
     setPosition(pos);
     setDimension(dim);
-    setFillintInfo(fillintInfo);
-    setBorderintInfo(borderintInfo);
+    setFillColorInfo(fillColorInfo);
+    setBorderColorInfo(borderColorInfo);
     setHasFill(hasFill);
     setHasBorder(true);
     setRectangle(new Rectangle(getPosition(), getDimension()));
   }
 
-  public GraphicLook(Point pos, Dimension dim, int[] fillintInfo, int[] borderintInfo, boolean hasFill,
+  public GraphicLook(Point pos, Dimension dim, int[] fillColorInfo, int[] borderColorInfo, boolean hasFill,
       boolean hasBorder) {
     setPosition(pos);
     setDimension(dim);
-    setFillintInfo(fillintInfo);
-    setBorderintInfo(borderintInfo);
+    setFillColorInfo(fillColorInfo);
+    setBorderColorInfo(borderColorInfo);
     setHasFill(hasFill);
     setHasBorder(hasBorder);
     setRectangle(new Rectangle(getPosition(), getDimension()));
@@ -91,12 +92,12 @@ public class GraphicLook {
     return this._dimension;
   }
 
-  public int[] getFillintInfo() {
-    return this._fillintInfo;
+  public int[] getFillColorInfo() {
+    return this._fillColorInfo;
   }
 
-  public int[] getBorderintInfo() {
-    return this._borderintInfo;
+  public int[] getBorderColorInfo() {
+    return this._borderColorInfo;
   }
 
   public boolean getHasFill() {
@@ -121,12 +122,12 @@ public class GraphicLook {
     this._dimension = value;
   }
 
-  public void setFillintInfo(int[] value) {
-    this._fillintInfo = value;
+  public void setFillColorInfo(int[] value) {
+    this._fillColorInfo = value;
   }
 
-  public void setBorderintInfo(int[] value) {
-    this._borderintInfo = value;
+  public void setBorderColorInfo(int[] value) {
+    this._borderColorInfo = value;
   }
 
   public void setHasFill(boolean value) {

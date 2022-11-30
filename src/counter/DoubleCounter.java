@@ -1,3 +1,4 @@
+package src.counter;
 class DoubleCounter {
 
   // Instance fields

@@ -1,4 +1,7 @@
-class TextVariable extends TextBlock {
+package src.widget.text;
+import java.awt.Point;
+
+public class TextVariable extends TextBlock {
 
     // Constructors
     
@@ -6,11 +9,11 @@ class TextVariable extends TextBlock {
       super("", position, offset);
     }
     
-    public TextVariable(Point position, Point offset, color caseColor){
+    public TextVariable(Point position, Point offset, int caseColor){
       super("", position, offset, caseColor);
     }
     
-    public TextVariable(Point position, Point offset, color caseColor, int caseSize){
+    public TextVariable(Point position, Point offset, int caseColor, int caseSize){
       super("", position, offset, caseColor, caseSize);
     }
     

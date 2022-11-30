@@ -1,5 +1,4 @@
 package src.widget.view.concrete;
-
 class SceneView extends View {
   
     public SceneView(GraphicLook graphicLook, Point offset) {

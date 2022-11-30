@@ -1,3 +1,4 @@
+package src.widget.button;
 public enum ButtonState {
     IDLE(0),
     HOVERED(1),
@@ -10,7 +11,7 @@ public enum ButtonState {
       this._value = value; 
     }
     
-    private int getValue() {
+    protected int getValue() {
       return this._value; 
     }
   }

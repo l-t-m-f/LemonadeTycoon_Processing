@@ -1,3 +1,4 @@
+package src.widget.button;
 import java.awt.Point;
 
 public class Button extends GraphicObject {
@@ -90,28 +91,28 @@ public class Button extends GraphicObject {
     logic();
 
     if (getHasBorder() == false) {
-      noStroke();
+      GameManager.getSketch().noStroke();
     } else {
-      stroke(getBorderColorInfo()[getButtonState().getValue()]);
+      GameManager.getSketch().stroke(getBorderColorInfo()[getButtonState().getValue()]);
     }
     if (getHasFill() == false) {
-      noFill();
+      GameManager.getSketch().noFill();
     } else {
-      fill(getFillColorInfo()[getButtonState().getValue()]);
+      GameManager.getSketch().fill(getFillColorInfo()[getButtonState().getValue()]);
     }
     int new_x = getRectangle().x + getOffset().x;
     int new_y = getRectangle().y + getOffset().y;
-    rect(new_x, new_y, getRectangle().width, getRectangle().height);
+    GameManager.getSketch().rect(new_x, new_y, getRectangle().width, getRectangle().height);
 
-    noStroke();
-    fill(255);
-    textFont(gameManager.getGUI().getFont(1), getLabelCaseSize());
+    GameManager.getSketch().noStroke();
+    GameManager.getSketch().fill(255);
+    GameManager.getSketch().textFont(GameManager.getGUI().getFont(1), getLabelCaseSize());
     final float charWidthConst = (getLabelCaseSize() / 4);
     final int halfWidth = getRectangle().width / 2;
     final int halfHeight = getRectangle().height / 2;
     final float textPosX = getRectangle().x + halfWidth - (getLabel().length() * charWidthConst) + getOffset().x;
     final float textPosY = getRectangle().y + halfHeight + charWidthConst + getOffset().y;
-    text(getLabel(), textPosX, textPosY);
+    GameManager.getSketch().text(getLabel(), textPosX, textPosY);
   }
 
   private void refresh() {
@@ -121,7 +122,7 @@ public class Button extends GraphicObject {
   public void logic() {
 
     if (checkMouse() == true) {
-      if (mousePressed == true && (gameManager.getKeystrokesResponsiveness() == true)) {
+      if (GameManager.getSketch().mousePressed == true && (GameManager.getKeystrokesResponsiveness() == true)) {
         setButtonState(ButtonState.PRESSED);
         if (getIsInAction() == false) {
           setIsInAction(true);
@@ -141,8 +142,8 @@ public class Button extends GraphicObject {
 
     int new_x = getRectangle().x + getOffset().x;
     int new_y = getRectangle().y + getOffset().y;
-    if (mouseX > new_x && mouseX < (new_x + getRectangle().width) &&
-        mouseY > new_y && mouseY < (new_y + getRectangle().height)) {
+    if (GameManager.getSketch().mouseX > new_x && GameManager.getSketch().mouseX < (new_x + getRectangle().width) &&
+    GameManager.getSketch().mouseY > new_y && GameManager.getSketch().mouseY < (new_y + getRectangle().height)) {
       return true;
 
     }
