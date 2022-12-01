@@ -2,8 +2,8 @@ package lemonade.widget.button;
 
 import lemonade.Util;
 import lemonade.singleton.GameManager;
-import lemonade.widget.counters.DoubleCounter;
-import lemonade.widget.counters.IntCounter;
+import lemonade.widget.counter.DoubleCounter;
+import lemonade.widget.counter.IntCounter;
 
 public class ButtonCommand {
 

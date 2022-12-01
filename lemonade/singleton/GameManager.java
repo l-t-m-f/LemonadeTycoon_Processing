@@ -1,8 +1,8 @@
 package lemonade.singleton;
 
 import lemonade.Sketch;
-import lemonade.widget.counters.DoubleCounter;
-import lemonade.widget.counters.IntCounter;
+import lemonade.widget.counter.DoubleCounter;
+import lemonade.widget.counter.IntCounter;
 import lemonade.widget.view.View;
 import lemonade.widget.view.main.*;
 

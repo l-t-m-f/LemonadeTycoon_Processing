@@ -1,22 +1,22 @@
-package lemonade.widget.counters;
+package lemonade.widget.counter;
 
-public class IntCounter {
+public class DoubleCounter {
 
   // Instance fields
 
-  private int _count;
-  private int _maxCount;
-  private int _minCount;
+  private double _count;
+  private double _maxCount;
+  private double _minCount;
 
   // Constructor
 
-  public IntCounter(int initialCount, int maxCount) {
+  public DoubleCounter(double initialCount, double maxCount) {
     setCount(initialCount);
     setMaxCount(maxCount);
     setMinCount(0);
   }
 
-  public IntCounter(int initialCount, int maxCount, int minCount) {
+  public DoubleCounter(double initialCount, double maxCount, double minCount) {
     setCount(initialCount);
     setMaxCount(maxCount);
     setMinCount(minCount);
@@ -24,57 +24,53 @@ public class IntCounter {
 
   // Getters
 
-  public int getCount() {
+  public double getCount() {
     return this._count;
   }
 
-  public int getMaxCount() {
+  public double getMaxCount() {
     return this._maxCount;
   }
 
-  public int getMinCount() {
+  public double getMinCount() {
     return this._minCount;
   }
 
   // Setters
 
-  public void setCount(int value) {
+  public void setCount(double value) {
     this._count = value;
   }
 
-  private void setMaxCount(int value) {
+  private void setMaxCount(double value) {
     this._maxCount = value;
   }
 
-  private void setMinCount(int value) {
+  private void setMinCount(double value) {
     this._minCount = value;
   }
 
   // Class methods
 
-  public void reset() {
-    setCount(0);
-  }
-
   public void increment() {
-    if ((getCount() + 1) <= getMaxCount()) {
+    if ((getCount() + 1.0) <= getMaxCount()) {
       setCount(getCount() + 1);
     }
   }
 
   public void decrement() {
-    if ((getCount() - 1) >= getMinCount()) {
-      setCount(getCount() - 1);
+    if ((getCount() - 1.0) >= getMinCount()) {
+      setCount(getCount() - 1.0);
     }
   }
 
-  public void add(int value) {
+  public void add(double value) {
     if ((getCount() + value) <= getMaxCount()) {
       setCount(getCount() + value);
     }
   }
 
-  public void subtract(int value) {
+  public void subtract(double value) {
     if ((getCount() - value) >= getMinCount()) {
       setCount(getCount() - value);
     }
