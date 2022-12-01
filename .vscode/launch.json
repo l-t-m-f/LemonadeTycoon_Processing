@@ -6,9 +6,45 @@
   "configurations": [
     {
       "type": "java",
-      "name": "Launch Current File",
+      "name": "Launch Sketch",
       "request": "launch",
-      "mainClass": "LemonadeTycoon"
+      "mainClass": "lemonade.Sketch",
+      "projectName": "LT2_613855c0"
+    },
+    {
+      "type": "java",
+      "name": "Launch Game",
+      "request": "launch",
+      "mainClass": "lemonade.Game",
+      "projectName": "LT2_613855c0"
+    },
+    {
+      "type": "java",
+      "name": "Launch LemonadeTycoon",
+      "request": "launch",
+      "mainClass": "lemonade.LemonadeTycoon",
+      "projectName": "LT2_613855c0"
+    },
+    {
+      "type": "java",
+      "name": "Launch Game",
+      "request": "launch",
+      "mainClass": "Game",
+      "projectName": "LT2_613855c0"
+    },
+    {
+      "type": "java",
+      "name": "Launch LemonadeTycoon",
+      "request": "launch",
+      "mainClass": "lemon.LemonadeTycoon",
+      "projectName": "LemonadeTycoon_47311149"
+    },
+    {
+      "type": "java",
+      "name": "Launch LemonadeTycoon",
+      "request": "launch",
+      "mainClass": "LemonadeTycoon",
+      "projectName": "LemonadeTycoon_47311149"
     }
   ]
 }
