@@ -8,7 +8,6 @@ public class TextBlock {
   // Instance fields
 
   private Point _position;
-  private Point _offset;
 
   private String _content; // text
 
@@ -17,26 +16,23 @@ public class TextBlock {
 
   // Constructors
 
-  public TextBlock(String content, Point position, Point offset) {
+  public TextBlock(String content, Point position) {
     setContent(content);
     setPosition(position);
-    setOffset(offset);
     setCaseSize(24);
   }
 
-  public TextBlock(String content, Point position, Point offset, int caseColor) {
+  public TextBlock(String content, Point position, int caseColor) {
     setContent(content);
     setPosition(position);
     setCaseColor(caseColor);
-    setOffset(offset);
     setCaseSize(24);
   }
 
-  public TextBlock(String content, Point position, Point offset, int caseColor, int caseSize) {
+  public TextBlock(String content, Point position, int caseColor, int caseSize) {
     setContent(content);
     setPosition(position);
     setCaseColor(caseColor);
-    setOffset(offset);
     setCaseSize(caseSize);
 
   }
@@ -59,10 +55,6 @@ public class TextBlock {
     return this._caseColor;
   }
 
-  public Point getOffset() {
-    return this._offset;
-  }
-
   // Setters
 
   public void setPosition(Point value) {
@@ -81,18 +73,14 @@ public class TextBlock {
     this._caseColor = value;
   }
 
-  protected void setOffset(Point value) {
-    this._offset = value;
-  }
-
   // Class methods
 
   public void draw() {
     GameManager.getInstance().getSketch().noStroke();
     GameManager.getInstance().getSketch().fill(getCaseColor());
     GameManager.getInstance().getSketch().textFont(GameManager.getInstance().getSketch().getFonts()[2], getCaseSize());
-    int placementX = getOffset().x + getPosition().x;
-    int placementY = getOffset().y + getPosition().y;
+    int placementX = getPosition().x;
+    int placementY = getPosition().y;
     GameManager.getInstance().getSketch().text(getContent(), placementX, placementY);
   }
 

@@ -1,13 +1,12 @@
 package lemonade.widget.view.inner;
 
-import java.awt.Point;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.view.View;
 
 public class ShopCups extends View {
 
-  public ShopCups(GraphicLook graphicLook, Point offset) {
-    super("Cups", graphicLook, offset);
+  public ShopCups(GraphicLook graphicLook) {
+    super("Cups", graphicLook);
     setVisibility(false);
   }
 

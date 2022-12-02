@@ -125,6 +125,18 @@ public class GameManager {
   public View getPresentedMainView() {
     return getMainViews()[getPresentedViewIndex()];
   }
+
+  public void printToScreen(String text, int x, int y) {
+    getSketch().text(text, x, y);
+  }
+
+  public void setSketchFill(int color) {
+    getSketch().fill(color);
+  }
+
+  public void setSketchTextFont(int id) {
+    getSketch().textFont(getSketch().getFonts()[id]);
+  }
   
   // Inner classes
 

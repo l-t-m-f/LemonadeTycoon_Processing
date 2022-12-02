@@ -15,17 +15,12 @@ public class Game extends View {
     super("Game",
         new GraphicLook(new Point(0, 0),
             new Dimension(GameManager.getInstance().getSketch().width, GameManager.getInstance().getSketch().height),
-            Util.Values.darkgray),
-        new Point(0, 0));
+            Util.Values.darkgray));
     setButtonCommands(new Runnable[] { new ButtonCommand.BackToMenu(), new ButtonCommand.DoNothing() });
     setVisibility(true);
     createButtons();
   }
-
-  @Override
-  public void createSubviews() {
-  }
-
+  
   @Override
   protected void createButtons() {
 
@@ -34,15 +29,14 @@ public class Game extends View {
       int next_y = GameManager.getInstance().getSketch().height - 450;
       addButton(
           new Button(
-              new GraphicLook(new Point(0, 0), new Dimension(75, 35), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-              new Point(next_x, next_y),
+              new GraphicLook(new Point(next_x, next_y), new Dimension(75, 35), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
               getButtonCommands()[i]));
     }
+    Point position = new Point(GameManager.getInstance().getSketch().width - 25,
+    GameManager.getInstance().getSketch().height - 25);
     addButton(
         new Button(
-            new GraphicLook(new Point(0, 0), new Dimension(25, 25), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-            new Point(GameManager.getInstance().getSketch().width - 25,
-                GameManager.getInstance().getSketch().height - 25),
+            new GraphicLook(position, new Dimension(25, 25), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
             getButtonCommands()[0]));
   }
 

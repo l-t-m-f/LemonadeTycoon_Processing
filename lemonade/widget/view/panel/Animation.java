@@ -11,8 +11,8 @@ import java.awt.Dimension;
 
 public class Animation extends View {
 
-  public Animation(GraphicLook graphicLook, Point offset) {
-    super("Scene", graphicLook, offset);
+  public Animation(GraphicLook graphicLook) {
+    super("Scene", graphicLook);
     setVisibility(true);
     setButtonCommands(new Runnable[] { new ButtonCommand.DoNothing(), new ButtonCommand.DoNothing() });
     createButtons();
@@ -27,13 +27,13 @@ public class Animation extends View {
 
   @Override
   protected void createButtons() {
+    Point position1 = new Point(365 + getPosition().x, 300 + getPosition().y);
+    Point position2 = new Point(365 + getPosition().x, 380 + getPosition().y);
     addButton(new Button(
-        new GraphicLook(new Point(0, 0), new Dimension(50, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-        new Point(365 + getOffset().x, 300 + getOffset().y),
+        new GraphicLook(position1, new Dimension(50, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
         getButtonCommands()[0]));
     addButton(new Button(
-        new GraphicLook(new Point(0, 0), new Dimension(50, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-        new Point(365 + getOffset().x, 380 + getOffset().y),
+        new GraphicLook(position2, new Dimension(50, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
         getButtonCommands()[1]));
   }
 

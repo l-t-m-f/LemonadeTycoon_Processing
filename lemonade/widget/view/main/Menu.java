@@ -13,7 +13,7 @@ public class Menu extends View {
 
     public Menu() {
         super("MainMenu", new GraphicLook(new Point(0, 0), new Dimension(GameManager.getInstance().getSketch().width,
-                GameManager.getInstance().getSketch().height), Util.Values.lime), new Point(0, 0));
+                GameManager.getInstance().getSketch().height), Util.Values.lime));
         setButtonLabels(new String[] { "Play", "Options", "Quit" });
         setButtonCommands(new Runnable[] {
                 new ButtonCommand.Play(),
@@ -31,9 +31,8 @@ public class Menu extends View {
             int next_y = (GameManager.getInstance().getSketch().height / 2) + 80 + (80 * i);
             addButton(
                     new Button(getButtonLabels()[i],
-                            new GraphicLook(new Point(0, 0), new Dimension(300, 75), Util.Values.BTN_FILL1,
+                            new GraphicLook(new Point(next_x, next_y), new Dimension(300, 75), Util.Values.BTN_FILL1,
                                     Util.Values.BTN_BORDER1),
-                            new Point(next_x, next_y),
                             getButtonCommands()[i]));
         }
     }

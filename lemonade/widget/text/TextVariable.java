@@ -6,16 +6,16 @@ public class TextVariable extends TextBlock {
 
   // Constructors
 
-  public TextVariable(Point position, Point offset) {
-    super("", position, offset);
+  public TextVariable(Point position) {
+    super("", position);
   }
 
-  public TextVariable(Point position, Point offset, int caseColor) {
-    super("", position, offset, caseColor);
+  public TextVariable(Point position, int caseColor) {
+    super("", position, caseColor);
   }
 
-  public TextVariable(Point position, Point offset, int caseColor, int caseSize) {
-    super("", position, offset, caseColor, caseSize);
+  public TextVariable(Point position, int caseColor, int caseSize) {
+    super("", position, caseColor, caseSize);
   }
 
   // Class methods

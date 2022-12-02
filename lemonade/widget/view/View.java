@@ -29,24 +29,22 @@ public abstract class View extends GraphicObject {
 
   // Constructors
 
-  public View(String name, GraphicLook graphicLook, Point offset) {
+  public View(String name, GraphicLook graphicLook) {
     super(graphicLook);
     setButtons(new ArrayList<Button>(8));
     setSubviews(new ArrayList<View>(8));
     setTextBlocks(new ArrayList<TextBlock>(8));
-    setTextVariables(new ArrayList<TextVariable>(8));
-    setOffset(new Point(offset.x + graphicLook.getPosition().x, offset.y + graphicLook.getPosition().y));
-    setDebugInfo(new DebugInfo(name, getGraphicLook().getPosition(), getOffset()));
+    setTextVariables(new ArrayList<TextVariable>(8));    
+    setDebugInfo(new DebugInfo(name, getGraphicLook().getPosition()));
   }
 
-  public View(String name, GraphicLook graphicLook, Point offset, Point debugInfoOffset) {
+  public View(String name, GraphicLook graphicLook, Point debugInfoOffset) {
     super(graphicLook);
     setButtons(new ArrayList<Button>(8));
     setSubviews(new ArrayList<View>(8));
     setTextBlocks(new ArrayList<TextBlock>(8));
-    setTextVariables(new ArrayList<TextVariable>(8));
-    setOffset(new Point(offset.x + graphicLook.getPosition().x, offset.y + graphicLook.getPosition().y));
-    setDebugInfo(new DebugInfo(name, getGraphicLook().getPosition(), debugInfoOffset));
+    setTextVariables(new ArrayList<TextVariable>(8));    
+    setDebugInfo(new DebugInfo(name, debugInfoOffset));
   }
 
   // Getters
@@ -170,7 +168,7 @@ public abstract class View extends GraphicObject {
       refreshTextVariables();
       GameManager.getInstance().getSketch().noStroke();
       GameManager.getInstance().getSketch().fill(getFillColorInfo()[0]);
-      GameManager.getInstance().getSketch().rect(getOffset().x + getRectangle().x, getOffset().y + getRectangle().y,
+      GameManager.getInstance().getSketch().rect(getRectangle().x, getRectangle().y,
           getRectangle().width, getRectangle().height);
 
       if (getSubviews().size() > 0) {
@@ -229,14 +227,12 @@ public abstract class View extends GraphicObject {
 
     private String _name;
     private Point _position;
-    private Point _offset;
 
     // Constructor
 
-    public DebugInfo(String name, Point position, Point offset) {
+    public DebugInfo(String name, Point position) {
       setName(name);
       setPosition(position);
-      setOffset(offset);
     }
 
     // Getters
@@ -249,10 +245,6 @@ public abstract class View extends GraphicObject {
       return this._position;
     }
 
-    public Point getOffset() {
-      return this._offset;
-    }
-
     // Setters
 
     public void setName(String name) {
@@ -263,20 +255,22 @@ public abstract class View extends GraphicObject {
       this._position = position;
     }
 
-    public void setOffset(Point offset) {
-      this._offset = offset;
-    }
-
     public void draw() {
-      GameManager.getInstance().getSketch().textFont(GameManager.getInstance().getSketch().getFonts()[2]);
-      GameManager.getInstance().getSketch().fill(255);
-      int placementX = getPosition().x + getOffset().x;
-      int placementY = getPosition().y + getOffset().y + 20;
-      GameManager.getInstance().getSketch().text(getName(), placementX, placementY);
-      int mouseDiffX = GameManager.getInstance().getSketch().mouseX - getPosition().x - getOffset().x;
-      int mouseDiffY = GameManager.getInstance().getSketch().mouseY - getPosition().y - getOffset().y;
-      GameManager.getInstance().getSketch().text(mouseDiffX + ", " + mouseDiffY, placementX,
-          placementY + Util.Values.TEXT_INTERLINE);
+      
+      GameManager.getInstance().setSketchTextFont(2);
+      GameManager.getInstance().setSketchFill(255);
+
+      int posX = getPosition().x;
+      int posY = getPosition().y + 20;
+
+      GameManager.getInstance().printToScreen(getName(), posX, posY);
+
+      int mouseDiffX = GameManager.getInstance().getSketch().mouseX - getPosition().x;
+      int mouseDiffY = GameManager.getInstance().getSketch().mouseY - getPosition().y;
+
+      posY += Util.Values.TEXT_INTERLINE;
+
+      GameManager.getInstance().printToScreen(mouseDiffX + ", " + mouseDiffY, posX, posY);
     }
   }
 }

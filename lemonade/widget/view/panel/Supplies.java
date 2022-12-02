@@ -15,8 +15,8 @@ import java.awt.Dimension;
 
 public class Supplies extends View {
 
-  public Supplies(GraphicLook graphicLook, Point offset) {
-    super("Supplies", graphicLook, offset);
+  public Supplies(GraphicLook graphicLook) {
+    super("Supplies", graphicLook);
     setVisibility(false);
     setButtonCommands(new Runnable[] {
         new ButtonCommand.ShowShopLemons(),
@@ -30,23 +30,23 @@ public class Supplies extends View {
 
   @Override
   protected void createSubviews() {
-    GraphicLook graphicLook = new GraphicLook(new Point(0, 0), new Dimension(250, 200), 0x880088FF);
-    Point offset = new Point(getOffset().x + 100, getOffset().y + 196);
+    Point position = Util.addPoint(new Point(100, 196), getPosition());
+    GraphicLook graphicLook = new GraphicLook(position, new Dimension(250, 200), 0x880088FF);
 
-    addSubview(new ShopLemons(graphicLook, offset));
-    addSubview(new ShopSugar(graphicLook, offset));
-    addSubview(new ShopIce(graphicLook, offset));
-    addSubview(new ShopCups(graphicLook, offset));
+    addSubview(new ShopLemons(graphicLook));
+    addSubview(new ShopSugar(graphicLook));
+    addSubview(new ShopIce(graphicLook));
+    addSubview(new ShopCups(graphicLook));
   }
 
   @Override
   protected void createButtons() {
     for (int i = 0; i < 4; i++) {
+      Point position = Util.addPoint(new Point(120 + (65 * i), 120), getPosition());
       addButton(
           new Button(
-              new GraphicLook(new Point(0, 0), new Dimension(50, 50), Util.Values.BTN_FILL1,
+              new GraphicLook(position, new Dimension(50, 50), Util.Values.BTN_FILL1,
                   Util.Values.BTN_BORDER1),
-              new Point(120 + (65 * i) + getOffset().x, 120 + getOffset().y),
               getButtonCommands()[i]));
     }
   }

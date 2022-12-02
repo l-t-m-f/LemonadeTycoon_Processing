@@ -13,8 +13,8 @@ import lemonade.widget.view.View;
 
 public class ShopLemons extends View {
 
-  public ShopLemons(GraphicLook graphicLook, Point offset) {
-    super("Lemons", graphicLook, offset);
+  public ShopLemons(GraphicLook graphicLook) {
+    super("Lemons", graphicLook);
     setButtonCommands(new Runnable[] {
         new ButtonCommand.SubtractLemonsFromOrder12(), new ButtonCommand.AddLemonsToOrder12(),
         new ButtonCommand.SubtractLemonsFromOrder24(), new ButtonCommand.AddLemonsToOrder24(),
@@ -32,17 +32,16 @@ public class ShopLemons extends View {
     for (int j = 0; j < 3; j++) {
       for (int i = 0; i < 3; i++) {
         if (i != 1) {
+          Point position = Util.addPoint(new Point(-10 + (112 * i), 8 + (65 * j)), getPosition());
           addButton(
-              new Button(new GraphicLook(new Point(0, 0), new Dimension(50, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-                  Util.addPoint(new Point(-10 + (112 * i), 8 + (65 * j)), getOffset()),
+              new Button(new GraphicLook(position, new Dimension(50, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
                   getButtonCommands()[buttonCount]));
           buttonCount++;
         }
       }
     }
-
-    addButton(new Button(new GraphicLook(new Point(0, 0), new Dimension(80, 40), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-        Util.addPoint(new Point(318, 80), getOffset()),
+    Point position = Util.addPoint(new Point(318, 80), getPosition());
+    addButton(new Button(new GraphicLook(position, new Dimension(80, 40), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
         new ButtonCommand.BuyLemonOrder()));
 
   }
@@ -55,10 +54,10 @@ public class ShopLemons extends View {
     String[] contents = { "12 lemons", "24 lemons", "48 lemons", "$ 4.80", "$ 7.20", "$ 9.60" };
 
     for (int i = 0; i < 3; i++) {
-      addTextBlock(new TextBlock(contents[i], new Point(0, 0),
-          Util.addPoint(new Point(startingX, startingY + (incrementY * i)), getOffset()),0xFFFFFFFF, 14));
-      addTextBlock(new TextBlock(contents[3 + i], new Point(0, 0),
-          Util.addPoint(new Point(startingX, startingY + (incrementY * i) + (Util.Values.TEXT_INTERLINE / 2)), getOffset()),
+      Point position1 = Util.addPoint(new Point(startingX, startingY + (incrementY * i)), getPosition());
+      Point position2 = Util.addPoint(new Point(startingX, startingY + (incrementY * i) + (Util.Values.TEXT_INTERLINE / 2)), getPosition());
+      addTextBlock(new TextBlock(contents[i], position1, 0xFFFFFFFF, 14));
+      addTextBlock(new TextBlock(contents[3 + i], position2,
           0xFFFFFFFF, 14));
     }
   }
@@ -69,8 +68,8 @@ public class ShopLemons extends View {
     final int incrementY = 60;
 
     for (int i = 0; i < 3; i++) {
-      addTextVariable(new TextVariable(new Point(0, 0),
-          Util.addPoint(new Point(startingX, startingY + (incrementY * i)), getOffset()), 0xFFFFFFFF, 24));
+      Point position = Util.addPoint(new Point(startingX, startingY + (incrementY * i)), getPosition());
+      addTextVariable(new TextVariable(position, 0xFFFFFFFF, 24));
     }
   }
 

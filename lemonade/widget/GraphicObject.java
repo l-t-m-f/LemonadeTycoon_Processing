@@ -1,6 +1,5 @@
 package lemonade.widget;
 
-import java.awt.Point;
 import java.awt.Rectangle;
 
 public abstract class GraphicObject {
@@ -9,7 +8,6 @@ public abstract class GraphicObject {
 
   private GraphicLook _graphicLook;
   protected boolean _visibility;
-  private Point _offset;
 
   // Constructors
 
@@ -26,10 +24,6 @@ public abstract class GraphicObject {
 
   public boolean getVisibility() {
     return this._visibility;
-  }
-
-  public Point getOffset() {
-    return this._offset;
   }
 
   //// Mixin getters
@@ -62,10 +56,6 @@ public abstract class GraphicObject {
 
   public void setVisibility(boolean value) {
     this._visibility = value;
-  }
-
-  protected void setOffset(Point value) {
-    this._offset = value;
   }
 
   // Class methods

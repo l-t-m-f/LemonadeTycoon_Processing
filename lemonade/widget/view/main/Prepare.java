@@ -25,8 +25,7 @@ public class Prepare extends View {
     super("GamePreparation",
         new GraphicLook(new Point(0, 0),
             new Dimension(GameManager.getInstance().getSketch().width, GameManager.getInstance().getSketch().height),
-            0xFF000000),
-        new Point(0, 0), new Point(0, 40));
+            0xFF000000), new Point(0, 40));
     setButtonLabels(new String[] { "MAIN MENU", "START DAY", "results", "rent", "upgrades", "staff", "marketing",
         "recipe", "supplies" });
     setButtonCommands(new Runnable[] {
@@ -49,27 +48,27 @@ public class Prepare extends View {
 
     // Modular subviews
 
-    Point subviewOrigin = new Point(0, 0);
-    Point subviewOffset = new Point(60, 244);
+    Point subviewOrigin = new Point(60, 244);
     Dimension subviewSize = new Dimension(552, 326);
     GraphicLook subviewGraphics = new GraphicLook(subviewOrigin, subviewSize, 0x777700FF);
 
-    addSubview(new Result(subviewGraphics, subviewOffset));
-    addSubview(new Rent(subviewGraphics, subviewOffset));
-    addSubview(new Upgrades(subviewGraphics, subviewOffset));
-    addSubview(new Staff(subviewGraphics, subviewOffset));
-    addSubview(new Marketing(subviewGraphics, subviewOffset));
-    addSubview(new Recipe(subviewGraphics, subviewOffset));
-    addSubview(new Supplies(subviewGraphics, subviewOffset));
+    addSubview(new Result(subviewGraphics));
+    addSubview(new Rent(subviewGraphics));
+    addSubview(new Upgrades(subviewGraphics));
+    addSubview(new Staff(subviewGraphics));
+    addSubview(new Marketing(subviewGraphics));
+    addSubview(new Recipe(subviewGraphics));
+    addSubview(new Supplies(subviewGraphics));
 
     // Permanent subviews
 
-    subviewOffset = new Point(723, 110);
+    subviewOrigin = new Point(723, 110);
     subviewSize = new Dimension(472, 460);
     subviewGraphics = new GraphicLook(subviewOrigin, subviewSize, 0x777700FF);
 
-    addSubview(new Animation(subviewGraphics, subviewOffset));
+    addSubview(new Animation(subviewGraphics));
 
+    subviewOrigin = new Point(0, 0);
     subviewSize = new Dimension(GameManager.getInstance().getSketch().width, 40);
     subviewGraphics = new GraphicLook(subviewOrigin, subviewSize, 0x777700FF);
 
@@ -82,8 +81,7 @@ public class Prepare extends View {
       int next_x = (GameManager.getInstance().getSketch().width / 2) - 350 + (350 * i);
       int next_y = GameManager.getInstance().getSketch().height - 55;
       addButton(new Button(getButtonLabels()[i],
-          new GraphicLook(new Point(0, 0), new Dimension(200, 35), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-          new Point(next_x, next_y),
+          new GraphicLook(new Point(next_x, next_y), new Dimension(200, 35), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
           getButtonCommands()[i]));
     }
 
@@ -91,8 +89,7 @@ public class Prepare extends View {
       int next_x = 60 + (80 * i);
       int next_y = 180;
       addButton(new Button(getButtonLabels()[2 + i], 16,
-          new GraphicLook(new Point(0, 0), new Dimension(70, 45), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-          new Point(next_x, next_y),
+          new GraphicLook(new Point(next_x, next_y), new Dimension(70, 45), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
           getButtonCommands()[2 + i]));
     }
   }

@@ -13,8 +13,8 @@ import lemonade.widget.view.inner.Charts;
 import lemonade.widget.view.inner.ProfitsLosses;
 
 public class Result extends View {
-  public Result(GraphicLook graphics, Point offset) {
-    super("Result", graphics, offset);
+  public Result(GraphicLook graphics) {
+    super("Result", graphics);
     setButtonCommands(new Runnable[] {
         () -> System.out.println("Command not implemented"),
         new ButtonCommand.ShowCharts(),
@@ -28,20 +28,20 @@ public class Result extends View {
 
   @Override
   protected void createSubviews() {
-    GraphicLook subsubviewGraphics = new GraphicLook(new Point(0, 0), new Dimension(250, 200), 0x8000FFFF);
-    Point offset = new Point(getOffset().x + 100, getOffset().y + 196);
-    addSubview(new Charts(subsubviewGraphics, offset));
-    addSubview(new ProfitsLosses(subsubviewGraphics, offset));
-    addSubview(new BalanceSheet(subsubviewGraphics, offset));
+    Point position = Util.addPoint(new Point(100, 196), getPosition());
+    GraphicLook subsubviewGraphics = new GraphicLook(position, new Dimension(250, 200), 0x8000FFFF);
+    addSubview(new Charts(subsubviewGraphics));
+    addSubview(new ProfitsLosses(subsubviewGraphics));
+    addSubview(new BalanceSheet(subsubviewGraphics));
   }
 
   @Override
   protected void createButtons() {
     for (int i = 0; i < 4; i++) {
+      Point position = Util.addPoint(new Point((65 * i), 80), getPosition());
       addButton(
           new Button(
-              new GraphicLook(new Point(0, 0), new Dimension(50, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-              new Point((65 * i) + getOffset().x, 80 + getOffset().y),
+              new GraphicLook(position, new Dimension(50, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
               getButtonCommands()[i]));
     }
   }

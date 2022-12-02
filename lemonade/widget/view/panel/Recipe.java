@@ -13,8 +13,8 @@ import java.awt.Point;
 
 public class Recipe extends View {
 
-  public Recipe(GraphicLook graphics, Point offset) {
-    super("Recipe", graphics, offset);
+  public Recipe(GraphicLook graphics) {
+    super("Recipe", graphics);
     setVisibility(false);
     setButtonCommands(new Runnable[] {
         new ButtonCommand.RemoveLemonFromRecipe(), new ButtonCommand.AddLemonToRecipe(),
@@ -33,9 +33,9 @@ public class Recipe extends View {
     for (int j = 0; j < 3; j++) {
       for (int i = 0; i < 3; i++) {
         if (i != 1) {
+          Point position = Util.addPoint(new Point(30 + (65 * i), 125 + (65 * j)), getPosition());
           addButton(new Button(
-              new GraphicLook(new Point(0, 0), new Dimension(50, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-              new Point(30 + (65 * i) + getOffset().x, 125 + (65 * j) + getOffset().y),
+              new GraphicLook(position, new Dimension(50, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
               getButtonCommands()[buttonCount]));
           buttonCount++;
         }
@@ -46,18 +46,24 @@ public class Recipe extends View {
   protected void createTextBlocks() {
     int startingX = 10;
     int startingY = 50;
-    addTextBlock(new TextBlock("Tweak your recipe according to temperature, adding more ice when needed.",
-        new Point(0, 0), Util.addPoint(new Point(startingX, startingY), getOffset()), 0xFFFFFFFF, 16));
-    addTextBlock(new TextBlock("Always keep a good balance between all ingredients.", new Point(0, 0),
-        Util.addPoint(new Point(startingX, startingY + Util.Values.TEXT_INTERLINE), getOffset()), 0xFFFFFFFF, 16));
-    addTextBlock(new TextBlock("Cups per pitcher: ", new Point(0, 0), Util.addPoint(new Point(245, 170), getOffset()),
+    Point position1 =  Util.addPoint(new Point(startingX, startingY), getPosition());
+    Point position2 = Util.addPoint(new Point(startingX, startingY + Util.Values.TEXT_INTERLINE), getPosition());
+    Point position3 = Util.addPoint(new Point(245, 170), getPosition());
+    addTextBlock(new TextBlock(Util.Values.StringPool[0],
+        position1, 0xFFFFFFFF, 16));
+    addTextBlock(new TextBlock(Util.Values.StringPool[1], position2, 0xFFFFFFFF, 16));
+    addTextBlock(new TextBlock(Util.Values.StringPool[2], position3,
         0xFFFFFFFF, 20));
   }
 
   protected void createTextVariables() {
-    addTextVariable(new TextVariable(new Point(0, 0), Util.addPoint(new Point(110, 152), getOffset()), 0xFFFFFFFF, 24));
-    addTextVariable(new TextVariable(new Point(0, 0), Util.addPoint(new Point(110, 222), getOffset()), 0xFFFFFFFF, 24));
-    addTextVariable(new TextVariable(new Point(0, 0), Util.addPoint(new Point(110, 292), getOffset()), 0xFFFFFFFF, 24));
+    Point position1 = Util.addPoint(new Point(110, 152), getPosition());
+    Point position2 = Util.addPoint(new Point(110, 222), getPosition());
+    Point position3 = Util.addPoint(new Point(110, 292), getPosition());
+
+    addTextVariable(new TextVariable(position1, 0xFFFFFFFF, 24));
+    addTextVariable(new TextVariable(position2, 0xFFFFFFFF, 24));
+    addTextVariable(new TextVariable(position3, 0xFFFFFFFF, 24));
   }
 
   protected void refreshTextVariables() {

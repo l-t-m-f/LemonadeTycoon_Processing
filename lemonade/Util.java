@@ -53,6 +53,15 @@ public class Util {
     public static final float CUPS_COST_225 = 2.35f;
     public static final float CUPS_COST_400 = 3.75f;
 
+    public static String[] StringPool = 
+    {
+      "Tweak your recipe according to temperature, adding more ice when needed.",
+      "Always keep a good balance between all ingredients.",
+      "Cups per pitcher: ",
+      
+
+    };
+
   }
 
 }

@@ -57,9 +57,12 @@ public class Sketch extends PApplet {
 
   public void initializeFonts() {
     setFonts(new PFont[3]);
-    getFonts()[0] = createFont("Arial", 48);
-    getFonts()[1] = createFont("Arial", 24);
-    getFonts()[2] = createFont("Arial", 12);
+    getFonts()[0] = createFont("Hack Bold", 48);
+    getFonts()[1] = createFont("Hack Bold", 24);
+    getFonts()[2] = createFont("Hack Bold", 12);
+    /*for(String f : PFont.list()) {
+      System.out.println(f);
+    }*/
   }
 
   // Driver code

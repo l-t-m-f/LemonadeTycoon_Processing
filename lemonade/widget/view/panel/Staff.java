@@ -12,8 +12,8 @@ import lemonade.widget.view.inner.HireProfile;
 
 public class Staff extends View {
 
-  public Staff(GraphicLook graphics, Point offset) {
-    super("Staff", graphics, offset);
+  public Staff(GraphicLook graphics) {
+    super("Staff", graphics);
     setVisibility(false);
     setButtonCommands(
         new Runnable[] { new ButtonCommand.DoNothing(), new ButtonCommand.DoNothing(), new ButtonCommand.DoNothing() });
@@ -23,27 +23,27 @@ public class Staff extends View {
 
   @Override
   protected void createSubviews() {
-    GraphicLook graphicLook = new GraphicLook(new Point(0, 0), new Dimension(250, 200), 0xFFFF0055);
-    Point offset = new Point(getOffset().x + 100, getOffset().y + 196);
-    addSubview(new HireProfile(graphicLook, offset));
+    Point position = Util.addPoint(new Point(100, 196), getPosition());
+    GraphicLook graphicLook = new GraphicLook(position, new Dimension(250, 200), 0xFFFF0055);
+    addSubview(new HireProfile(graphicLook));
   }
 
   @Override
   protected void createButtons() {
+    Point position1 = Util.addPoint(new Point(60, 156), getPosition());
+    Point position2 = Util.addPoint(new Point(412, 156), getPosition());
+    Point position3 = Util.addPoint(new Point(310, 260), getPosition());
     addButton(
         new Button(
-            new GraphicLook(new Point(0, 0), new Dimension(70, 30), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-            new Point(60 + getOffset().x, 156 + getOffset().y),
+            new GraphicLook(position1, new Dimension(70, 30), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
             getButtonCommands()[0]));
     addButton(
         new Button(
-            new GraphicLook(new Point(0, 0), new Dimension(70, 30), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-            new Point(412 + getOffset().x, 156 + getOffset().y),
+            new GraphicLook(position2, new Dimension(70, 30), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
             getButtonCommands()[1]));
     addButton(
         new Button(
-            new GraphicLook(new Point(0, 0), new Dimension(120, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-            new Point(310 + getOffset().x, 260 + getOffset().y),
+            new GraphicLook(position3, new Dimension(120, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
             getButtonCommands()[2]));
   }
 

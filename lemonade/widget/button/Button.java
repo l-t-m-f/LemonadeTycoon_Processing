@@ -1,7 +1,5 @@
 package lemonade.widget.button;
 
-import java.awt.Point;
-
 import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.GraphicObject;
@@ -16,32 +14,29 @@ public class Button extends GraphicObject {
 
   // Constructors
 
-  public Button(GraphicLook graphicLook, Point offset, Runnable command) {
+  public Button(GraphicLook graphicLook, Runnable command) {
     super(graphicLook);
     setLabel("");
     setButtonCommand(command);
     setButtonState(ButtonState.IDLE);
     setVisibility(true);
-    setOffset(new Point(offset.x + graphicLook.getPosition().x, offset.y + graphicLook.getPosition().y));
   }
 
-  public Button(String label, GraphicLook graphicLook, Point offset, Runnable command) {
+  public Button(String label, GraphicLook graphicLook, Runnable command) {
     super(graphicLook);
     setLabel(label);
     setButtonCommand(command);
     setButtonState(ButtonState.IDLE);
     setVisibility(true);
-    setOffset(new Point(offset.x + graphicLook.getPosition().x, offset.y + graphicLook.getPosition().y));
   }
 
-  public Button(String label, int labelCaseSize, GraphicLook graphicLook, Point offset, Runnable command) {
+  public Button(String label, int labelCaseSize, GraphicLook graphicLook, Runnable command) {
     super(graphicLook);
     setLabel(label);
     setLabelCaseSize(labelCaseSize);
     setButtonCommand(command);
     setButtonState(ButtonState.IDLE);
     setVisibility(true);
-    setOffset(new Point(offset.x + graphicLook.getPosition().x, offset.y + graphicLook.getPosition().y));
   }
 
   // Getters
@@ -105,9 +100,7 @@ public class Button extends GraphicObject {
     } else {
       GameManager.getInstance().getSketch().fill(getFillColorInfo()[getButtonState().getValue()]);
     }
-    int new_x = getRectangle().x + getOffset().x;
-    int new_y = getRectangle().y + getOffset().y;
-    GameManager.getInstance().getSketch().rect(new_x, new_y, getRectangle().width, getRectangle().height);
+    GameManager.getInstance().getSketch().rect(getRectangle().x, getRectangle().y, getRectangle().width, getRectangle().height);
 
     GameManager.getInstance().getSketch().noStroke();
     GameManager.getInstance().getSketch().fill(255);
@@ -116,8 +109,8 @@ public class Button extends GraphicObject {
     final float charWidthConst = (getLabelCaseSize() / 4);
     final int halfWidth = getRectangle().width / 2;
     final int halfHeight = getRectangle().height / 2;
-    final float textPosX = getRectangle().x + halfWidth - (getLabel().length() * charWidthConst) + getOffset().x;
-    final float textPosY = getRectangle().y + halfHeight + charWidthConst + getOffset().y;
+    final float textPosX = getRectangle().x + halfWidth - (getLabel().length() * charWidthConst);
+    final float textPosY = getRectangle().y + halfHeight + charWidthConst;
     GameManager.getInstance().getSketch().text(getLabel(), textPosX, textPosY);
   }
 
@@ -147,12 +140,12 @@ public class Button extends GraphicObject {
 
   private boolean checkMouse() {
 
-    int new_x = getRectangle().x + getOffset().x;
-    int new_y = getRectangle().y + getOffset().y;
-    if (GameManager.getInstance().getSketch().mouseX > new_x
-        && GameManager.getInstance().getSketch().mouseX < (new_x + getRectangle().width) &&
-        GameManager.getInstance().getSketch().mouseY > new_y
-        && GameManager.getInstance().getSketch().mouseY < (new_y + getRectangle().height)) {
+    int x = getRectangle().x;
+    int y = getRectangle().y;
+    if (GameManager.getInstance().getSketch().mouseX > x
+        && GameManager.getInstance().getSketch().mouseX < (x + getRectangle().width) &&
+        GameManager.getInstance().getSketch().mouseY > y
+        && GameManager.getInstance().getSketch().mouseY < (y + getRectangle().height)) {
       return true;
 
     }
