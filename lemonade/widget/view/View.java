@@ -148,6 +148,8 @@ public abstract class View extends GraphicObject {
   protected void createTextVariables() {
   }
 
+  protected void createStaticContent() { }
+
   protected void refreshTextVariables() {
   }
 
