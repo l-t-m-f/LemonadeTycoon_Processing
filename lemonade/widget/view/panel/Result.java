@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 import lemonade.Util;
+import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
@@ -20,7 +21,6 @@ public class Result extends View {
 
   private static String _presentedInnerViewName = "Charts";
   private final static int _componentAnchorY = 196;
-  private final static int _componentMarginH = 15;
 
   // Instance fields
   // None
@@ -47,10 +47,6 @@ public class Result extends View {
     return _componentAnchorY;
   }
 
-  public static int getComponentMarginH() {
-    return _componentMarginH;
-  }
-
   public static String getPresentedInnerViewName() {
     return _presentedInnerViewName;
   }
@@ -75,7 +71,7 @@ public class Result extends View {
 
       Point buttonPosition = Util.addPoint(
         new Point(
-          getComponentMarginH() + buttonOffsetH + ((buttonDimension.width + buttonSpacing) * i), 
+          getMarginH() + buttonOffsetH + ((buttonDimension.width + buttonSpacing) * i), 
           getComponentAnchorY() - marginV - buttonDimension.height
         ), 
         getPosition()
@@ -100,12 +96,12 @@ public class Result extends View {
 
     final int marginV = 35;
 
-    Point position = Util.addPoint(new Point(getComponentMarginH(), getComponentAnchorY()), getPosition());
+    Point position = Util.addPoint(new Point(getMarginH(), getComponentAnchorY()), getPosition());
     GraphicLook subsubviewGraphics = 
         new GraphicLook(
           position,
           new Dimension(
-            getRectangle().width - (getComponentMarginH() * 2),
+            getRectangle().width - (getMarginH() * 2),
             getRectangle().height - getComponentAnchorY() - marginV),
           0x8000FFFF);
 
@@ -117,7 +113,7 @@ public class Result extends View {
   @Override
   protected void createTextVariables() {
     Point position1 = Util.addPoint(new Point(75, 32), getPosition());
-    addTextVariable(new TextVariable(position1, 0xFFFFFFFF, 32));
+    addTextVariable(new TextVariable(position1));
   }
 
   @Override

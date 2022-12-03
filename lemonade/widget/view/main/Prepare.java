@@ -5,6 +5,7 @@ import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
+import lemonade.widget.text.TextGraphic;
 import lemonade.widget.view.View;
 import lemonade.widget.view.panel.Animation;
 import lemonade.widget.view.panel.Marketing;
@@ -27,8 +28,17 @@ public class Prepare extends View {
             new Dimension(GameManager.getInstance().getSketch().width, GameManager.getInstance().getSketch().height),
             0xFF000000),
         new Point(0, 40));
-    setButtonLabels(new String[] { "MAIN MENU", "START DAY", "results", "rent", "upgrades", "staff", "marketing",
-        "recipe", "supplies" });
+    setButtonTextGraphics(new TextGraphic[] { 
+          new TextGraphic("MAIN MENU"),
+          new TextGraphic("START DAY"),
+          new TextGraphic("results"),
+          new TextGraphic("rent"),
+          new TextGraphic("upgrades"),
+          new TextGraphic("staff"),
+          new TextGraphic("marketing"),
+          new TextGraphic("recipe"),
+          new TextGraphic("supplies"),
+    });
     setButtonCommands(new Runnable[] {
         new ButtonCommand.BackToMenu(),
         new ButtonCommand.StartDay(),
@@ -81,14 +91,14 @@ public class Prepare extends View {
     for (int i = 0; i < 2; i++) {
       Point position = new Point((GameManager.getInstance().getSketch().width / 2) - 450 + (210 * i),
           (GameManager.getInstance().getSketch().height - 55));
-      addButton(new Button(getButtonLabels()[i],
+      addButton(new Button(getButtonTextGraphics()[i],
           new GraphicLook(position, new Dimension(200, 35), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
           getButtonCommands()[i]));
     }
 
     for (int i = 0; i < 7; i++) {
       Point position = new Point((60 + (80 * i)), 120);
-      addButton(new Button(getButtonLabels()[2 + i], 16,
+      addButton(new Button(getButtonTextGraphics()[2 + i],
           new GraphicLook(position, new Dimension(70, 45), Util.Values.BTN_FILL1,
               Util.Values.BTN_BORDER1),
           getButtonCommands()[2 + i]));

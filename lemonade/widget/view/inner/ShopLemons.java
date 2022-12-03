@@ -7,7 +7,7 @@ import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
-import lemonade.widget.text.TextBlock;
+import lemonade.widget.text.TextGraphic;
 import lemonade.widget.text.TextVariable;
 import lemonade.widget.view.View;
 
@@ -56,9 +56,8 @@ public class ShopLemons extends View {
     for (int i = 0; i < 3; i++) {
       Point position1 = Util.addPoint(new Point(startingX, startingY + (incrementY * i)), getPosition());
       Point position2 = Util.addPoint(new Point(startingX, startingY + (incrementY * i) + (Util.Values.TEXT_INTERLINE / 2)), getPosition());
-      addTextBlock(new TextBlock(contents[i], position1, 0xFFFFFFFF, 14));
-      addTextBlock(new TextBlock(contents[3 + i], position2,
-          0xFFFFFFFF, 14));
+      addTextBlock(new TextGraphic(contents[i], position1));
+      addTextBlock(new TextGraphic(contents[3 + i], position2));
     }
   }
 
@@ -69,7 +68,7 @@ public class ShopLemons extends View {
 
     for (int i = 0; i < 3; i++) {
       Point position = Util.addPoint(new Point(startingX, startingY + (incrementY * i)), getPosition());
-      addTextVariable(new TextVariable(position, 0xFFFFFFFF, 24));
+      addTextVariable(new TextVariable(position));
     }
   }
 

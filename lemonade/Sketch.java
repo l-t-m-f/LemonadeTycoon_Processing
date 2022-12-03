@@ -1,7 +1,11 @@
 package lemonade;
 
+import java.util.HashMap;
 import java.util.Objects;
 
+import lemonade.enumeration.FontStyleType;
+import lemonade.enumeration.FontFaceType;
+import lemonade.enumeration.FontSizeType;
 import lemonade.singleton.GameManager;
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -10,7 +14,7 @@ public class Sketch extends PApplet {
 
   // Instance fields
 
-  private PFont[] _fonts;
+  private HashMap<FontFaceType, HashMap<FontStyleType, PFont[]>> _fonts;
 
   // Constructor
 
@@ -19,13 +23,13 @@ public class Sketch extends PApplet {
 
   // Getters
 
-  public PFont[] getFonts() {
+  public HashMap<FontFaceType, HashMap<FontStyleType, PFont[]>> getFonts() {
     return this._fonts;
   }
 
   // Setters
 
-  public void setFonts(PFont[] value) {
+  public void setFonts(HashMap<FontFaceType, HashMap<FontStyleType, PFont[]>> value) {
     this._fonts = value;
   }
 
@@ -56,10 +60,14 @@ public class Sketch extends PApplet {
   }
 
   public void initializeFonts() {
-    setFonts(new PFont[3]);
-    getFonts()[0] = createFont("Hack Bold", 48);
-    getFonts()[1] = createFont("Hack Bold", 24);
-    getFonts()[2] = createFont("Hack Bold", 12);
+    setFonts(new HashMap<>(3));
+    getFonts().put(FontFaceType.HACK, new HashMap<>(1));
+    PFont[] fontArray = new PFont[5];
+    for(int i = 0; i < FontSizeType.MAX_FONT_SIZE.ordinal() - 1; i++) {
+      fontArray[i] = createFont("Hack Bold", Util.Values.TEXT_DEFAULT_SIZES[i]);
+    }
+    getFonts().get(FontFaceType.HACK).put(FontStyleType.BOLD, fontArray);
+    
     /*for(String f : PFont.list()) {
       System.out.println(f);
     }*/

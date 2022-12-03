@@ -1,40 +1,34 @@
 package lemonade.widget.button;
 
+import java.util.Objects;
+
 import lemonade.enumeration.ButtonStateType;
 import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.GraphicObject;
+import lemonade.widget.text.TextGraphic;
 
 public class Button extends GraphicObject {
 
   private ButtonStateType _buttonState;
   private Runnable _buttonCommand;
   private boolean _isInAction;
-  private String _label;
-  private int _labelCaseSize = 24;
+  private TextGraphic _textGraphic;
 
   // Constructors
 
   public Button(GraphicLook graphicLook, Runnable command) {
     super(graphicLook);
-    setLabel("");
+    setTextGraphic(null);
     setButtonCommand(command);
     setButtonState(ButtonStateType.IDLE);
     setVisibility(true);
   }
 
-  public Button(String label, GraphicLook graphicLook, Runnable command) {
+  public Button(TextGraphic text, GraphicLook graphicLook, Runnable command) {
     super(graphicLook);
-    setLabel(label);
-    setButtonCommand(command);
-    setButtonState(ButtonStateType.IDLE);
-    setVisibility(true);
-  }
-
-  public Button(String label, int labelCaseSize, GraphicLook graphicLook, Runnable command) {
-    super(graphicLook);
-    setLabel(label);
-    setLabelCaseSize(labelCaseSize);
+    setTextGraphic(text);
+    getTextGraphic().setPosition(graphicLook.getPosition());
     setButtonCommand(command);
     setButtonState(ButtonStateType.IDLE);
     setVisibility(true);
@@ -54,12 +48,8 @@ public class Button extends GraphicObject {
     return this._isInAction;
   }
 
-  public String getLabel() {
-    return this._label;
-  }
-
-  public int getLabelCaseSize() {
-    return this._labelCaseSize;
+  public TextGraphic getTextGraphic() {
+    return this._textGraphic;
   }
 
   // Setters
@@ -76,12 +66,8 @@ public class Button extends GraphicObject {
     this._isInAction = value;
   }
 
-  public void setLabel(String value) {
-    this._label = value;
-  }
-
-  public void setLabelCaseSize(int value) {
-    this._labelCaseSize = value;
+  public void setTextGraphic(TextGraphic value) {
+    this._textGraphic = value;
   }
 
   // Custom methods
@@ -103,16 +89,25 @@ public class Button extends GraphicObject {
     }
     GameManager.getInstance().getSketch().rect(getRectangle().x, getRectangle().y, getRectangle().width, getRectangle().height);
 
-    GameManager.getInstance().getSketch().noStroke();
-    GameManager.getInstance().getSketch().fill(255);
-    GameManager.getInstance().getSketch().textFont(GameManager.getInstance().getSketch().getFonts()[1],
-        getLabelCaseSize());
-    final float charWidthConst = (getLabelCaseSize() / 4);
+    if(Objects.isNull(getTextGraphic()) == false) {
+      drawButtonText();
+    }
+
+  }
+
+  private void drawButtonText() {
+    GameManager.getInstance().setSketchNoStroke();
+    GameManager.getInstance().setSketchFill(255);
+    
+    GameManager.getInstance().setSketchTextFont(getTextGraphic().getLook().getFont());
+
+    final float charWidthConst = (getTextGraphic().getLook().getFont().getDefaultSize() / 4);
     final int halfWidth = getRectangle().width / 2;
     final int halfHeight = getRectangle().height / 2;
-    final float textPosX = getRectangle().x + halfWidth - (getLabel().length() * charWidthConst);
+    final float textPosX = getRectangle().x + halfWidth - (getTextGraphic().getContent().length() * charWidthConst);
     final float textPosY = getRectangle().y + halfHeight + charWidthConst;
-    GameManager.getInstance().getSketch().text(getLabel(), textPosX, textPosY);
+
+    GameManager.getInstance().getSketch().text(getTextGraphic().getContent(), textPosX, textPosY);
   }
 
   private void refresh() {

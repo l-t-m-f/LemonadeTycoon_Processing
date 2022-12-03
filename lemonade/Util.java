@@ -39,8 +39,11 @@ public class Util {
     public static final int[] BTN_BORDER1 = { magenta, purple, olive };
 
     
-
+    public static final int[] TEXT_DEFAULT_SIZES = { 10, 12, 16, 24, 48 };
     public static final int TEXT_INTERLINE = 28;
+    public static final int TEXT_DEFAULT_FACE_INDEX = 0;
+    public static final float TEXT_DEFAULT_SCALE = 1.0f;
+    public static final int TEXT_DEFAULT_COLOR = 0xFFFFFFFF;
 
     public static final float LEMONS_COST_12 = 4.8f;
     public static final float LEMONS_COST_24 = 7.2f;

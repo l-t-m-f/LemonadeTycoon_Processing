@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import lemonade.Util;
 import lemonade.enumeration.LocationType;
+import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
@@ -80,14 +81,14 @@ public class Locations extends View {
   protected void createTextVariables() {
   
       Point titlePosition = Util.addPoint(new Point(170, 15), getPosition());
-      addTextVariable(new TextVariable(titlePosition, 0xFFFFFFFF, 24));
+      addTextVariable(new TextVariable(titlePosition));
 
       Point taglinePosition = Util.addPoint(new Point(170, 35), getPosition());
-      addTextVariable(new TextVariable(taglinePosition, 0xFFFFFFFF, 12));
+      addTextVariable(new TextVariable(taglinePosition));
       getTextVariable(1).setWrapBox(new Dimension(200, 80));
 
       Point pricePosition = Util.addPoint(new Point(332, 168), getPosition());
-      addTextVariable(new TextVariable(pricePosition, 0xFFFFFFFF, 12));
+      addTextVariable(new TextVariable(pricePosition));
   }
 
   @Override

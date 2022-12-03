@@ -5,24 +5,33 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import lemonade.Util;
+import lemonade.enumeration.FontFaceType;
+import lemonade.enumeration.FontSizeType;
+import lemonade.enumeration.FontStyleType;
 import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.GraphicObject;
 import lemonade.widget.button.Button;
-import lemonade.widget.text.TextBlock;
+import lemonade.widget.text.TextGraphic;
 import lemonade.widget.text.TextVariable;
 
 public abstract class View extends GraphicObject {
+
+
+  // Class fields
+
+  private final static int _marginH = 15;
+  private final static int _marginV = 15;
 
   // Instance fields
 
   private DebugInfo _debugInfo;
 
   private Runnable[] _buttonCommands;
-  private String[] _buttonLabels;
+  private TextGraphic[] _buttonTextGraphics;
   private ArrayList<Button> _buttons;
 
-  private ArrayList<TextBlock> _textBlocks;
+  private ArrayList<TextGraphic> _textGraphics;
   private ArrayList<TextVariable> _textVariables;
 
   private ArrayList<View> _subviews;
@@ -33,8 +42,8 @@ public abstract class View extends GraphicObject {
     super(graphicLook);
     setButtons(new ArrayList<Button>(8));
     setSubviews(new ArrayList<View>(8));
-    setTextBlocks(new ArrayList<TextBlock>(8));
-    setTextVariables(new ArrayList<TextVariable>(8));    
+    setTextGraphics(new ArrayList<TextGraphic>(8));
+    setTextVariables(new ArrayList<TextVariable>(8));   
     setDebugInfo(new DebugInfo(name, getGraphicLook().getPosition()));
   }
 
@@ -42,7 +51,7 @@ public abstract class View extends GraphicObject {
     super(graphicLook);
     setButtons(new ArrayList<Button>(8));
     setSubviews(new ArrayList<View>(8));
-    setTextBlocks(new ArrayList<TextBlock>(8));
+    setTextGraphics(new ArrayList<TextGraphic>(8));
     setTextVariables(new ArrayList<TextVariable>(8));    
     setDebugInfo(new DebugInfo(name, debugInfoOffset));
   }
@@ -61,16 +70,24 @@ public abstract class View extends GraphicObject {
     return this._subviews;
   }
 
-  public String[] getButtonLabels() {
-    return this._buttonLabels;
+  public TextGraphic[] getButtonTextGraphics() {
+    return this._buttonTextGraphics;
   }
 
   public Runnable[] getButtonCommands() {
     return this._buttonCommands;
   }
 
-  public ArrayList<TextBlock> getTextBlocks() {
-    return this._textBlocks;
+  public static int getMarginH() {
+    return _marginH;
+  }
+
+  public static int getMarginV() {
+    return _marginV;
+  }
+
+  public ArrayList<TextGraphic> getTextGraphics() {
+    return this._textGraphics;
   }
 
   public ArrayList<TextVariable> getTextVariables() {
@@ -91,16 +108,16 @@ public abstract class View extends GraphicObject {
     this._subviews = value;
   }
 
-  public void setButtonLabels(String[] value) {
-    this._buttonLabels = value;
+  public void setButtonTextGraphics(TextGraphic[] value) {
+    this._buttonTextGraphics = value;
   }
 
   public void setButtonCommands(Runnable[] value) {
     this._buttonCommands = value;
   }
 
-  public void setTextBlocks(ArrayList<TextBlock> value) {
-    this._textBlocks = value;
+  public void setTextGraphics(ArrayList<TextGraphic> value) {
+    this._textGraphics = value;
   }
 
   public void setTextVariables(ArrayList<TextVariable> value) {
@@ -128,8 +145,8 @@ public abstract class View extends GraphicObject {
     getButtons().add(button);
   }
 
-  public void addTextBlock(TextBlock textBlock) {
-    getTextBlocks().add(textBlock);
+  public void addTextBlock(TextGraphic textBlock) {
+    getTextGraphics().add(textBlock);
   }
 
   public void addTextVariable(TextVariable textVariable) {
@@ -185,8 +202,8 @@ public abstract class View extends GraphicObject {
         }
       }
 
-      if (getTextBlocks().size() > 0) {
-        for (TextBlock tb : getTextBlocks()) {
+      if (getTextGraphics().size() > 0) {
+        for (TextGraphic tb : getTextGraphics()) {
           tb.draw();
         }
       }
@@ -259,7 +276,7 @@ public abstract class View extends GraphicObject {
 
     public void draw() {
       
-      GameManager.getInstance().setSketchTextFont(2);
+      GameManager.getInstance().setSketchTextFont(GameManager.getInstance().getFont(FontFaceType.HACK, FontStyleType.BOLD, FontSizeType.SMALL));
       GameManager.getInstance().setSketchFill(255);
 
       int posX = getPosition().x;

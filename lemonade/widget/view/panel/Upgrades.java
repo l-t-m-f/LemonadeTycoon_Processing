@@ -4,10 +4,11 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 import lemonade.Util;
+import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
-import lemonade.widget.text.TextBlock;
+import lemonade.widget.text.TextGraphic;
 import lemonade.widget.view.View;
 import lemonade.widget.view.inner.ShopUpgrade;
 
@@ -47,7 +48,7 @@ public class Upgrades extends View {
             new GraphicLook(position2, new Dimension(40, 70), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
             getButtonCommands()[1]));
     addButton(
-        new Button("Buy",
+        new Button(new TextGraphic("Buy"),
             new GraphicLook(position3, new Dimension(120, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
             getButtonCommands()[2]));
   }
@@ -62,10 +63,10 @@ public class Upgrades extends View {
   @Override
   protected void createTextBlocks() {    
     Point position1 = Util.addPoint(new Point(75, 32), getPosition());
-    addTextBlock(new TextBlock("Upgrades", position1, 0xFFFFFFFF, 32));
+    addTextBlock(new TextGraphic("Upgrades", position1));
 
     Point position2 = Util.addPoint(new Point(75, 55), getPosition());
-    TextBlock textBlock = new TextBlock("Improve your stand to send your sales through the roof!", position2, 0xFFFFFFFF, 16);
+    TextGraphic textBlock = new TextGraphic("Improve your stand to send your sales through the roof!", position2);
     textBlock.setWrapBox(new Dimension(485, 85));
     addTextBlock(textBlock);
   }

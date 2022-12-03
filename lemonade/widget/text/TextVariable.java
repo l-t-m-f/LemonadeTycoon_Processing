@@ -2,7 +2,7 @@ package lemonade.widget.text;
 
 import java.awt.Point;
 
-public class TextVariable extends TextBlock {
+public class TextVariable extends TextGraphic {
 
   // Constructors
 
@@ -10,12 +10,8 @@ public class TextVariable extends TextBlock {
     super("", position);
   }
 
-  public TextVariable(Point position, int caseColor) {
-    super("", position, caseColor);
-  }
-
-  public TextVariable(Point position, int caseColor, int caseSize) {
-    super("", position, caseColor, caseSize);
+  public TextVariable(Point position, TextLook look) {
+    super("", position, look);
   }
 
   // Class methods

@@ -1,10 +1,16 @@
 package lemonade.singleton;
 
+import java.util.HashMap;
+
 import lemonade.Sketch;
+import lemonade.enumeration.FontSizeType;
+import lemonade.enumeration.FontStyleType;
+import lemonade.enumeration.FontFaceType;
 import lemonade.widget.counter.DoubleCounter;
 import lemonade.widget.counter.IntCounter;
 import lemonade.widget.view.View;
 import lemonade.widget.view.main.*;
+import processing.core.PFont;
 
 public class GameManager {
 
@@ -112,10 +118,6 @@ public class GameManager {
 
   // Class methods
 
-  public void boxedPrintToScreen(String text, int x1, int y1, int x2, int y2) {
-    getSketch().text(text, x1, y1, x2, y2);
-  }
-
   public void createMainViews() {
     getMainViews()[0] = new Menu();
     getMainViews()[1] = new Prepare();
@@ -130,6 +132,20 @@ public class GameManager {
     return getMainViews()[getPresentedViewIndex()];
   }
 
+  // Sketch mixin methods
+
+  public void boxedPrintToScreen(String text, int x1, int y1, int x2, int y2) {
+    getSketch().text(text, x1, y1, x2, y2);
+  }
+
+  public PFont getFont(FontFaceType font, FontStyleType style, FontSizeType size) {
+    return getFonts().get(font).get(style)[size.ordinal() - 1];
+  }
+
+  private HashMap<FontFaceType, HashMap<FontStyleType, PFont[]>> getFonts() {
+    return getSketch().getFonts();
+  } 
+
   public void printToScreen(String text, int x, int y) {
     getSketch().text(text, x, y);
   }
@@ -142,12 +158,13 @@ public class GameManager {
     getSketch().noStroke();
   }
 
-  public void setSketchTextFont(int id) {
-    getSketch().textFont(getSketch().getFonts()[id]);
+  public void setSketchTextFont(PFont font) {
+    getSketch().textFont(font);
   }
 
-  public void setSketchTextFont(int id, int typeCase) {
-    getSketch().textFont(getSketch().getFonts()[id], typeCase);
+  public void setSketchTextFontAndScale(PFont font, float scale) {
+    int newSize = (int)(font.getDefaultSize() * scale);
+    getSketch().textFont(font, newSize);
   }
   
   // Inner classes

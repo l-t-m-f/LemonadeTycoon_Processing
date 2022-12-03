@@ -4,10 +4,11 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 import lemonade.Util;
+import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
-import lemonade.widget.text.TextBlock;
+import lemonade.widget.text.TextGraphic;
 import lemonade.widget.view.View;
 import lemonade.widget.view.inner.Locations;
 
@@ -48,7 +49,7 @@ public class Rent extends View {
             new GraphicLook(position2, new Dimension(40, 70), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
             getButtonCommands()[1]));
     addButton(
-        new Button("Rent",
+        new Button(new TextGraphic("Rent"),
             new GraphicLook(position3, new Dimension(120, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
             getButtonCommands()[2]));
   }
@@ -63,9 +64,9 @@ public class Rent extends View {
   @Override
   protected void createTextBlocks() {    
     Point position1 = Util.addPoint(new Point(75, 32), getPosition());
-    addTextBlock(new TextBlock("Locations", position1, 0xFFFFFFFF, 32));
+    addTextBlock(new TextGraphic("Locations", position1));
 
     Point position2 = Util.addPoint(new Point(75, 55), getPosition());
-    addTextBlock(new TextBlock("Choose a location.", position2, 0xFFFFFFFF, 16));
+    addTextBlock(new TextGraphic("Choose a location.", position2));
   }
 }

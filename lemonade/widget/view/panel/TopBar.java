@@ -31,11 +31,11 @@ public class TopBar extends View {
         Point position5 = Util.addPoint(new Point(GameManager.getInstance().getSketch().width - 100, 30),
                 getPosition());
 
-        addTextVariable(new TextVariable(position1, 0xFFFFFFFF, 24));
-        addTextVariable(new TextVariable(position2, 0xFFFFFFFF, 24));
-        addTextVariable(new TextVariable(position3, 0xFFFFFFFF, 24));
-        addTextVariable(new TextVariable(position4, 0xFFFFFFFF, 24));
-        addTextVariable(new TextVariable(position5, 0xFFFFFFFF, 24));
+        addTextVariable(new TextVariable(position1));
+        addTextVariable(new TextVariable(position2));
+        addTextVariable(new TextVariable(position3));
+        addTextVariable(new TextVariable(position4));
+        addTextVariable(new TextVariable(position5));
     }
 
     protected void refreshTextVariables() {

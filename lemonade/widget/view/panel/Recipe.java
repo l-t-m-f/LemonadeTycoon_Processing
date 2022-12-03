@@ -5,7 +5,7 @@ import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
-import lemonade.widget.text.TextBlock;
+import lemonade.widget.text.TextGraphic;
 import lemonade.widget.text.TextVariable;
 import lemonade.widget.view.View;
 import java.awt.Dimension;
@@ -46,22 +46,20 @@ public class Recipe extends View {
   protected void createTextBlocks() {
 
     Point position1 = Util.addPoint(new Point(75, 32), getPosition());
-    addTextBlock(new TextBlock("Recipe", position1, 0xFFFFFFFF, 16));
+    addTextBlock(new TextGraphic("Recipe", position1));
 
     Point position2 = Util.addPoint(new Point(75, 55), getPosition());
-    TextBlock preparedTextBlock1 = new TextBlock(
+    TextGraphic preparedTextBlock1 = new TextGraphic(
         "Tweak your recipe according to temperature, adding more ice when needed. Always keep a good balance between all ingredients.",
-        position2, 0xFFFFFFFF, 16);
+        position2);
     preparedTextBlock1.setWrapBox(new Dimension(485, 85));
     addTextBlock(preparedTextBlock1);
 
     Point position3 = Util.addPoint(new Point(285, 170), getPosition());
-    addTextBlock(new TextBlock("Cups per pitcher: ", position3,
-        0xFFFFFFFF, 20));
+    addTextBlock(new TextGraphic("Cups per pitcher: ", position3));
 
     Point position4 = Util.addPoint(new Point(285, 210), getPosition());
-    addTextBlock(new TextBlock("Cost per cup: ", position4,
-        0xFFFFFFFF, 20));
+    addTextBlock(new TextGraphic("Cost per cup: ", position4));
   }
 
   protected void createTextVariables() {
@@ -69,9 +67,9 @@ public class Recipe extends View {
     Point position2 = Util.addPoint(new Point(128, 267), getPosition());
     Point position3 = Util.addPoint(new Point(128, 337), getPosition());
 
-    addTextVariable(new TextVariable(position1, 0xFFFFFFFF, 24));
-    addTextVariable(new TextVariable(position2, 0xFFFFFFFF, 24));
-    addTextVariable(new TextVariable(position3, 0xFFFFFFFF, 24));
+    addTextVariable(new TextVariable(position1));
+    addTextVariable(new TextVariable(position2));
+    addTextVariable(new TextVariable(position3));
   }
 
   protected void refreshTextVariables() {
