@@ -1,6 +1,6 @@
-package lemonade.widget.button;
+package lemonade.enumeration;
 
-public enum ButtonState {
+public enum ButtonStateType {
   IDLE(0),
   HOVERED(1),
   PRESSED(2),
@@ -8,11 +8,11 @@ public enum ButtonState {
   
   private final int _value;
   
-  private ButtonState(int value) {
+  private ButtonStateType(int value) {
     this._value = value; 
   }
   
-  protected int getValue() {
+  public int getValue() {
     return this._value; 
   }
 }

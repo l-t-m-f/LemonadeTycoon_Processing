@@ -157,7 +157,7 @@ public abstract class View extends GraphicObject {
     return getSubviews().get(index);
   }
 
-  private TextVariable getTextVariable(int index) {
+  protected TextVariable getTextVariable(int index) {
     return getTextVariables().get(index);
   }
 

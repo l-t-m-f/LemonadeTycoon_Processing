@@ -1,9 +1,11 @@
 package lemonade.widget.button;
 
 import lemonade.Util;
+import lemonade.enumeration.LocationType;
 import lemonade.singleton.GameManager;
 import lemonade.widget.counter.DoubleCounter;
 import lemonade.widget.counter.IntCounter;
+import lemonade.widget.view.inner.Locations;
 
 public class ButtonCommand {
 
@@ -242,6 +244,28 @@ public class ButtonCommand {
           c.reset();
         }
       }
+    }
+  }
+  
+  public static class PreviousLocation implements Runnable {
+    public void run() {
+      if(Locations.getCurrentLocation() > 0) {
+        Locations.setCurrentLocation(Locations.getCurrentLocation() - 1);
+      }
+    }
+  }
+
+  public static class NextLocation implements Runnable {
+    public void run() {
+      if(Locations.getCurrentLocation() < (LocationType.LOCATION_TYPE_TOTAL.ordinal() - 1)) {
+        Locations.setCurrentLocation(Locations.getCurrentLocation() + 1);
+      }
+    }
+  }
+
+  public static class RentLocation implements Runnable {
+    public void run() {
+      
     }
   }
 

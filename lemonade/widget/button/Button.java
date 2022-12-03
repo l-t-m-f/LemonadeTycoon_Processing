@@ -1,12 +1,13 @@
 package lemonade.widget.button;
 
+import lemonade.enumeration.ButtonStateType;
 import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.GraphicObject;
 
 public class Button extends GraphicObject {
 
-  private ButtonState _buttonState;
+  private ButtonStateType _buttonState;
   private Runnable _buttonCommand;
   private boolean _isInAction;
   private String _label;
@@ -18,7 +19,7 @@ public class Button extends GraphicObject {
     super(graphicLook);
     setLabel("");
     setButtonCommand(command);
-    setButtonState(ButtonState.IDLE);
+    setButtonState(ButtonStateType.IDLE);
     setVisibility(true);
   }
 
@@ -26,7 +27,7 @@ public class Button extends GraphicObject {
     super(graphicLook);
     setLabel(label);
     setButtonCommand(command);
-    setButtonState(ButtonState.IDLE);
+    setButtonState(ButtonStateType.IDLE);
     setVisibility(true);
   }
 
@@ -35,13 +36,13 @@ public class Button extends GraphicObject {
     setLabel(label);
     setLabelCaseSize(labelCaseSize);
     setButtonCommand(command);
-    setButtonState(ButtonState.IDLE);
+    setButtonState(ButtonStateType.IDLE);
     setVisibility(true);
   }
 
   // Getters
 
-  public ButtonState getButtonState() {
+  public ButtonStateType getButtonState() {
     return this._buttonState;
   }
 
@@ -63,7 +64,7 @@ public class Button extends GraphicObject {
 
   // Setters
 
-  public void setButtonState(ButtonState value) {
+  public void setButtonState(ButtonStateType value) {
     this._buttonState = value;
   }
 
@@ -123,17 +124,17 @@ public class Button extends GraphicObject {
     if (checkMouse() == true) {
       if (GameManager.getInstance().getSketch().mousePressed == true
           && (GameManager.getInstance().getKeystrokesResponsiveness() == true)) {
-        setButtonState(ButtonState.PRESSED);
+        setButtonState(ButtonStateType.PRESSED);
         if (getIsInAction() == false) {
           setIsInAction(true);
           getButtonCommand().run();
         }
       } else {
         refresh();
-        setButtonState(ButtonState.HOVERED);
+        setButtonState(ButtonStateType.HOVERED);
       }
     } else {
-      setButtonState(ButtonState.IDLE);
+      setButtonState(ButtonStateType.IDLE);
     }
 
   }

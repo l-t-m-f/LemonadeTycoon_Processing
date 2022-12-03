@@ -112,6 +112,10 @@ public class GameManager {
 
   // Class methods
 
+  public void boxedPrintToScreen(String text, int x1, int y1, int x2, int y2) {
+    getSketch().text(text, x1, y1, x2, y2);
+  }
+
   public void createMainViews() {
     getMainViews()[0] = new Menu();
     getMainViews()[1] = new Prepare();
@@ -134,8 +138,16 @@ public class GameManager {
     getSketch().fill(color);
   }
 
+  public void setSketchNoStroke() {
+    getSketch().noStroke();
+  }
+
   public void setSketchTextFont(int id) {
     getSketch().textFont(getSketch().getFonts()[id]);
+  }
+
+  public void setSketchTextFont(int id, int typeCase) {
+    getSketch().textFont(getSketch().getFonts()[id], typeCase);
   }
   
   // Inner classes

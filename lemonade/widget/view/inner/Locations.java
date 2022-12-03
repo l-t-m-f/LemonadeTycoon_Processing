@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import lemonade.Util;
+import lemonade.enumeration.LocationType;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
@@ -14,10 +15,16 @@ import processing.core.PImage;
 
 public class Locations extends View {
 
+  // Class fields
+
+  private static int _currentLocation;
   private static ArrayList<Location> _locations = new ArrayList<>(10);
+
+  // Constructor(s)
 
   public Locations(GraphicLook graphicLook) {
     super("Locations", graphicLook);
+    setCurrentLocation(0);
     setButtonCommands(new Runnable[] { new ButtonCommand.DoNothing() });
     setVisibility(true);
     createButtons();
@@ -25,13 +32,27 @@ public class Locations extends View {
     createTextVariables();
   }
 
+  // Getters
+
+  public static int getCurrentLocation() {
+    return _currentLocation;
+  }
+
   public ArrayList<Location> getLocations() {
     return _locations;
   }
 
+  // Setters
+
+  public static void setCurrentLocation(int value) {
+    _currentLocation = value;
+  }
+
+  // Class methods
+
   @Override
   public void createButtons() {
-    Point position = Util.addPoint(new Point(384, 116), getPosition());
+    Point position = Util.addPoint(new Point(394, 112), getPosition());
     addButton(
         new Button(
             new GraphicLook(position, new Dimension(28, 28), Util.Values.BTN_FILL1,
@@ -41,34 +62,46 @@ public class Locations extends View {
 
   @Override
   public void createStaticContent() {
-    getLocations().add(new Location("The Suburbs"));
-    getLocations().add(new Location("The Park"));
-    getLocations().add(new Location("Downtown"));
-    getLocations().add(new Location("The Train Station"));
-    getLocations().add(new Location("The Beach"));
-    getLocations().add(new Location("The Mall"));
-    getLocations().add(new Location("The Marina"));
-    getLocations().add(new Location("The Old Square"));
-    getLocations().add(new Location("The Magic Gardens"));
-    getLocations().add(new Location("The Hexa-Stad"));
+    getLocations().add(new Location(LocationType.SUBURBS));
+    getLocations().add(new Location(LocationType.PARK));
+    getLocations().add(new Location(LocationType.DOWNTOWN));
+    getLocations().add(new Location(LocationType.TRAIN_STATION));
+    getLocations().add(new Location(LocationType.BEACH));
+    getLocations().add(new Location(LocationType.MALL));
+    getLocations().add(new Location(LocationType.MARINA));
+    getLocations().add(new Location(LocationType.OLD_SQUARE));
+    getLocations().add(new Location(LocationType.MAGIC_GARDENS));
+    getLocations().add(new Location(LocationType.HEXA_STAD));
   }
 
   protected void createTextBlocks() {}
 
+  @Override
   protected void createTextVariables() {
   
-      Point position = Util.addPoint(new Point(100, 15), getPosition());
-      addTextVariable(new TextVariable(position, 0xFFFFFFFF, 24));
-    
+      Point titlePosition = Util.addPoint(new Point(170, 15), getPosition());
+      addTextVariable(new TextVariable(titlePosition, 0xFFFFFFFF, 24));
+
+      Point taglinePosition = Util.addPoint(new Point(170, 35), getPosition());
+      addTextVariable(new TextVariable(taglinePosition, 0xFFFFFFFF, 12));
+      getTextVariable(1).setWrapBox(new Dimension(200, 80));
+
+      Point pricePosition = Util.addPoint(new Point(332, 168), getPosition());
+      addTextVariable(new TextVariable(pricePosition, 0xFFFFFFFF, 12));
   }
 
+  @Override
   protected void refreshTextVariables() {
-    updateTextVariable(0, "" + getLocations().get(0).getTitle());
+    updateTextVariable(0, "" + getLocations().get(getCurrentLocation()).getTitle());
+    updateTextVariable(1, "" + getLocations().get(getCurrentLocation()).getTagline());
+    updateTextVariable(2, "$ " + getLocations().get(getCurrentLocation()).getPrice());
   }
+
+  // Inner classes
 
   class Location {
 
-    // Class fields
+    // Instance fields
 
     private String _title = "";
     private String _tagline = "";
@@ -80,14 +113,14 @@ public class Locations extends View {
 
     // Constructor(s)
 
-    public Location(String title) {
+    public Location(LocationType locationType) {
       
-      setTitle(title);
-      setTagline(Util.Values.LocationTaglines.get(title));
+      setTitle(Util.Values.LocationTitles.get(locationType));
+      setTagline(Util.Values.LocationTaglines.get(locationType));
 
-      setPopularity(Util.Values.LocationPopularity.get(title).doubleValue());
-      setSatisfaction(Util.Values.LocationSatisfaction.get(title).doubleValue());
-      setPrice(Util.Values.LocationPrice.get(title).doubleValue());
+      setPopularity(Util.Values.LocationPopularity.get(locationType).doubleValue());
+      setSatisfaction(Util.Values.LocationSatisfaction.get(locationType).doubleValue());
+      setPrice(Util.Values.LocationPrice.get(locationType).doubleValue());
     }
 
     // Getters

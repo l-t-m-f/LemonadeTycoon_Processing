@@ -2,6 +2,8 @@ package lemonade.widget.text;
 
 import lemonade.singleton.GameManager;
 import java.awt.Point;
+import java.awt.Dimension;
+import java.util.Objects;
 
 public class TextBlock {
 
@@ -13,6 +15,8 @@ public class TextBlock {
 
   private int _caseSize;
   private int _caseColor;
+
+  private Dimension _wrapBox;
 
   // Constructors
 
@@ -55,6 +59,10 @@ public class TextBlock {
     return this._caseColor;
   }
 
+  public Dimension getWrapBox() {
+    return this._wrapBox;
+  }
+
   // Setters
 
   public void setPosition(Point value) {
@@ -73,15 +81,25 @@ public class TextBlock {
     this._caseColor = value;
   }
 
+  public void setWrapBox(Dimension value) {
+    this._wrapBox = value;
+  }
+
   // Class methods
 
   public void draw() {
-    GameManager.getInstance().getSketch().noStroke();
-    GameManager.getInstance().getSketch().fill(getCaseColor());
-    GameManager.getInstance().getSketch().textFont(GameManager.getInstance().getSketch().getFonts()[2], getCaseSize());
-    int placementX = getPosition().x;
-    int placementY = getPosition().y;
-    GameManager.getInstance().getSketch().text(getContent(), placementX, placementY);
+    GameManager.getInstance().setSketchNoStroke();
+    GameManager.getInstance().setSketchFill(getCaseColor());
+    GameManager.getInstance().setSketchTextFont(2, 18);
+    int posX = getPosition().x;
+    int posY = getPosition().y;
+    if (Objects.isNull(getWrapBox()) == false) {
+      GameManager.getInstance().getSketch().text(getContent(), posX, posY,
+          getWrapBox().width,
+          getWrapBox().height);
+    } else {
+      GameManager.getInstance().getSketch().text(getContent(), posX, posY);
+    }
   }
 
 }
