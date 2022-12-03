@@ -65,7 +65,7 @@ public class Rent extends View {
     Point position1 = Util.addPoint(new Point(75, 32), getPosition());
     addTextBlock(new TextBlock("Locations", position1, 0xFFFFFFFF, 32));
 
-    Point position2 = Util.addPoint(new Point(75, 70), getPosition());
+    Point position2 = Util.addPoint(new Point(75, 55), getPosition());
     addTextBlock(new TextBlock("Choose a location.", position2, 0xFFFFFFFF, 16));
   }
 }

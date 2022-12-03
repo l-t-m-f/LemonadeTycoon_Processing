@@ -6,6 +6,7 @@ import lemonade.singleton.GameManager;
 import lemonade.widget.counter.DoubleCounter;
 import lemonade.widget.counter.IntCounter;
 import lemonade.widget.view.inner.Locations;
+import lemonade.widget.view.panel.Result;
 
 public class ButtonCommand {
 
@@ -89,13 +90,15 @@ public class ButtonCommand {
     public void run() {
       GameManager.getInstance().getPresentedMainView().getSubview(0).hideAllSubviews();
       GameManager.getInstance().getPresentedMainView().getSubview(0).showSubview(0);
+      Result.setPresentedInnerViewName("Charts");
     }
   }
 
-  public static class ShowProfitsLosses implements Runnable {
+  public static class ShowProfitLoss implements Runnable {
     public void run() {
       GameManager.getInstance().getPresentedMainView().getSubview(0).hideAllSubviews();
       GameManager.getInstance().getPresentedMainView().getSubview(0).showSubview(1);
+      Result.setPresentedInnerViewName("Profit & Loss");
     }
   }
 
@@ -103,6 +106,7 @@ public class ButtonCommand {
     public void run() {
       GameManager.getInstance().getPresentedMainView().getSubview(0).hideAllSubviews();
       GameManager.getInstance().getPresentedMainView().getSubview(0).showSubview(2);
+      Result.setPresentedInnerViewName("Balance Sheet");
     }
   }
 

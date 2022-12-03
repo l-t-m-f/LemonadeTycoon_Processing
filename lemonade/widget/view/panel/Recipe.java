@@ -33,7 +33,7 @@ public class Recipe extends View {
     for (int j = 0; j < 3; j++) {
       for (int i = 0; i < 3; i++) {
         if (i != 1) {
-          Point position = Util.addPoint(new Point(30 + (65 * i), 125 + (65 * j)), getPosition());
+          Point position = Util.addPoint(new Point(45 + (65 * i), 175 + (65 * j)), getPosition());
           addButton(new Button(
               new GraphicLook(position, new Dimension(50, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
               getButtonCommands()[buttonCount]));
@@ -44,22 +44,30 @@ public class Recipe extends View {
   }
 
   protected void createTextBlocks() {
-    int startingX = 10;
-    int startingY = 50;
-    Point position1 =  Util.addPoint(new Point(startingX, startingY), getPosition());
-    Point position2 = Util.addPoint(new Point(startingX, startingY + Util.Values.TEXT_INTERLINE), getPosition());
-    Point position3 = Util.addPoint(new Point(245, 170), getPosition());
-    addTextBlock(new TextBlock(Util.Values.StringPool[0],
-        position1, 0xFFFFFFFF, 16));
-    addTextBlock(new TextBlock(Util.Values.StringPool[1], position2, 0xFFFFFFFF, 16));
-    addTextBlock(new TextBlock(Util.Values.StringPool[2], position3,
+
+    Point position1 = Util.addPoint(new Point(75, 32), getPosition());
+    addTextBlock(new TextBlock("Recipe", position1, 0xFFFFFFFF, 16));
+
+    Point position2 = Util.addPoint(new Point(75, 55), getPosition());
+    TextBlock preparedTextBlock1 = new TextBlock(
+        "Tweak your recipe according to temperature, adding more ice when needed. Always keep a good balance between all ingredients.",
+        position2, 0xFFFFFFFF, 16);
+    preparedTextBlock1.setWrapBox(new Dimension(485, 85));
+    addTextBlock(preparedTextBlock1);
+
+    Point position3 = Util.addPoint(new Point(285, 170), getPosition());
+    addTextBlock(new TextBlock("Cups per pitcher: ", position3,
+        0xFFFFFFFF, 20));
+
+    Point position4 = Util.addPoint(new Point(285, 210), getPosition());
+    addTextBlock(new TextBlock("Cost per cup: ", position4,
         0xFFFFFFFF, 20));
   }
 
   protected void createTextVariables() {
-    Point position1 = Util.addPoint(new Point(110, 152), getPosition());
-    Point position2 = Util.addPoint(new Point(110, 222), getPosition());
-    Point position3 = Util.addPoint(new Point(110, 292), getPosition());
+    Point position1 = Util.addPoint(new Point(128, 197), getPosition());
+    Point position2 = Util.addPoint(new Point(128, 267), getPosition());
+    Point position3 = Util.addPoint(new Point(128, 337), getPosition());
 
     addTextVariable(new TextVariable(position1, 0xFFFFFFFF, 24));
     addTextVariable(new TextVariable(position2, 0xFFFFFFFF, 24));

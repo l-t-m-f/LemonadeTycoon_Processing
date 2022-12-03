@@ -140,9 +140,7 @@ public class Util {
 
     public static String[] StringPool = 
     {
-      "Tweak your recipe according to temperature, adding more ice when needed.",
-      "Always keep a good balance between all ingredients.",
-      "Cups per pitcher: ",
+      
       "Choose a location.",    
     };
 

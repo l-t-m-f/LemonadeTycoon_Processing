@@ -4,9 +4,9 @@ import lemonade.widget.GraphicLook;
 import lemonade.widget.button.ButtonCommand;
 import lemonade.widget.view.View;
 
-public class ShopItem extends View {
+public class ShopUpgrade extends View {
 
-  public ShopItem(GraphicLook graphicLook) {
+  public ShopUpgrade(GraphicLook graphicLook) {
     super("Item", graphicLook);
     setButtonCommands(new Runnable[] { new ButtonCommand.DoNothing() });
     setVisibility(true);

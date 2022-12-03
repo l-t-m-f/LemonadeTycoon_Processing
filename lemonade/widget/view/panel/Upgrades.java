@@ -7,10 +7,16 @@ import lemonade.Util;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
+import lemonade.widget.text.TextBlock;
 import lemonade.widget.view.View;
-import lemonade.widget.view.inner.ShopItem;
+import lemonade.widget.view.inner.ShopUpgrade;
 
 public class Upgrades extends View {
+
+  // Class fields
+  // Instance fields
+
+  // Constructor(s)
 
   public Upgrades(GraphicLook graphics) {
     super("Upgrades", graphics);
@@ -19,31 +25,48 @@ public class Upgrades extends View {
         new Runnable[] { new ButtonCommand.DoNothing(), new ButtonCommand.DoNothing(), new ButtonCommand.DoNothing() });
     createButtons();
     createSubviews();
+    createTextBlocks();
+  }
+  
+  // Getters
+  // Setters
+
+  // Class methods
+
+  @Override
+  protected void createButtons() {
+    Point position1 = Util.addPoint(new Point(13, 160), getPosition());
+    Point position2 = Util.addPoint(new Point(342, 160), getPosition());
+    Point position3 = Util.addPoint(new Point(378, 362), getPosition());
+    addButton(
+        new Button(
+            new GraphicLook(position1, new Dimension(40, 70), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
+            getButtonCommands()[0]));
+    addButton(
+        new Button(
+            new GraphicLook(position2, new Dimension(40, 70), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
+            getButtonCommands()[1]));
+    addButton(
+        new Button("Buy",
+            new GraphicLook(position3, new Dimension(120, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
+            getButtonCommands()[2]));
   }
 
   @Override
   protected void createSubviews() {
-    Point position = new Point(getRectangle().x + 100, getRectangle().y + 196);
-    GraphicLook graphicLook = new GraphicLook(position, new Dimension(250, 200), 0x4400FFFF);
-    addSubview(new ShopItem(graphicLook));
+    Point position = Util.addPoint(new Point(57, 155), getPosition());
+    GraphicLook graphicLook = new GraphicLook(position, new Dimension(280, 194), 0x3300FFFF);
+    addSubview(new ShopUpgrade(graphicLook));
   }
 
   @Override
-  protected void createButtons() {
-    Point position1 = Util.addPoint(new Point(60, 156), getPosition());
-    Point position2 = Util.addPoint(new Point(412, 156), getPosition());
-    Point position3 = Util.addPoint(new Point(310, 156), getPosition());
-    addButton(
-        new Button(
-            new GraphicLook(position1, new Dimension(70, 30), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-            getButtonCommands()[0]));
-    addButton(
-        new Button(
-            new GraphicLook(position2, new Dimension(70, 30), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-            getButtonCommands()[1]));
-    addButton(
-        new Button(
-            new GraphicLook(position3, new Dimension(120, 50), Util.Values.BTN_FILL1, Util.Values.BTN_BORDER1),
-            getButtonCommands()[2]));
+  protected void createTextBlocks() {    
+    Point position1 = Util.addPoint(new Point(75, 32), getPosition());
+    addTextBlock(new TextBlock("Upgrades", position1, 0xFFFFFFFF, 32));
+
+    Point position2 = Util.addPoint(new Point(75, 55), getPosition());
+    TextBlock textBlock = new TextBlock("Improve your stand to send your sales through the roof!", position2, 0xFFFFFFFF, 16);
+    textBlock.setWrapBox(new Dimension(485, 85));
+    addTextBlock(textBlock);
   }
 }
