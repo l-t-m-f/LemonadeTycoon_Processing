@@ -10,7 +10,7 @@ import lemonade.widget.counter.IntCounter;
 import lemonade.widget.view.inner.HireProfile;
 import lemonade.widget.view.inner.Locations;
 import lemonade.widget.view.inner.ShopUpgrade;
-import lemonade.widget.view.panel.Result;
+import lemonade.widget.view.panel.Results;
 
 public class ButtonCommand {
 
@@ -90,27 +90,35 @@ public class ButtonCommand {
     }
   }
 
-  public static class ShowCharts implements Runnable {
+  public static class ShowYesterdays implements Runnable {
     public void run() {
       GameManager.getInstance().getPresentedMainView().getSubview(0).hideAllSubviews();
       GameManager.getInstance().getPresentedMainView().getSubview(0).showSubview(0);
-      Result.setPresentedInnerViewName("Charts");
+      Results.setPresentedInnerViewName("Yesterday's Result");
+    }
+  }
+
+  public static class ShowCharts implements Runnable {
+    public void run() {
+      GameManager.getInstance().getPresentedMainView().getSubview(0).hideAllSubviews();
+      GameManager.getInstance().getPresentedMainView().getSubview(0).showSubview(1);
+      Results.setPresentedInnerViewName("Charts");
     }
   }
 
   public static class ShowProfitLoss implements Runnable {
     public void run() {
       GameManager.getInstance().getPresentedMainView().getSubview(0).hideAllSubviews();
-      GameManager.getInstance().getPresentedMainView().getSubview(0).showSubview(1);
-      Result.setPresentedInnerViewName("Profit & Loss");
+      GameManager.getInstance().getPresentedMainView().getSubview(0).showSubview(2);
+      Results.setPresentedInnerViewName("Profit & Loss");
     }
   }
 
   public static class ShowBalanceSheet implements Runnable {
     public void run() {
       GameManager.getInstance().getPresentedMainView().getSubview(0).hideAllSubviews();
-      GameManager.getInstance().getPresentedMainView().getSubview(0).showSubview(2);
-      Result.setPresentedInnerViewName("Balance Sheet");
+      GameManager.getInstance().getPresentedMainView().getSubview(0).showSubview(3);
+      Results.setPresentedInnerViewName("Balance Sheet");
     }
   }
 

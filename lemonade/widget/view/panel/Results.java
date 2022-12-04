@@ -13,12 +13,14 @@ import lemonade.widget.view.ViewLayout;
 import lemonade.widget.view.inner.BalanceSheet;
 import lemonade.widget.view.inner.Charts;
 import lemonade.widget.view.inner.ProfitLoss;
+import lemonade.widget.view.inner.Yesterdays;
 
-public class Result extends View {
+/* RESULTS (View) */
+/* Presents the results of the player under various formats. */
 
+public class Results extends View {
 
   // Class fields
-
   private static String _presentedInnerViewName = "Charts";
 
   // Instance fields
@@ -26,10 +28,10 @@ public class Result extends View {
 
   // Constructor(s)
 
-  public Result(GraphicLook graphics) {
+  public Results(GraphicLook graphics) {
     super("Result", graphics);
     setButtonCommands(new Runnable[] {
-        () -> System.out.println("Command not implemented"),
+        new ButtonCommand.ShowYesterdays(),
         new ButtonCommand.ShowCharts(),
         new ButtonCommand.ShowProfitLoss(),
         new ButtonCommand.ShowBalanceSheet()
@@ -104,6 +106,7 @@ public class Result extends View {
             getRectangle().height - getLayout().getSubviewMarginTop(0) - 35),
           0x8000FFFF);
 
+    addSubview(new Yesterdays(subsubviewGraphics));
     addSubview(new Charts(subsubviewGraphics));
     addSubview(new ProfitLoss(subsubviewGraphics));
     addSubview(new BalanceSheet(subsubviewGraphics));

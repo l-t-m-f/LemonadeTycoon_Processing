@@ -11,7 +11,7 @@ import lemonade.widget.view.panel.Animation;
 import lemonade.widget.view.panel.Marketing;
 import lemonade.widget.view.panel.Recipe;
 import lemonade.widget.view.panel.Rent;
-import lemonade.widget.view.panel.Result;
+import lemonade.widget.view.panel.Results;
 import lemonade.widget.view.panel.Staff;
 import lemonade.widget.view.panel.Supplies;
 import lemonade.widget.view.panel.TopBar;
@@ -64,7 +64,7 @@ public class Prepare extends View {
     Dimension subviewSize = new Dimension(579, 406);
     GraphicLook subviewGraphics = new GraphicLook(subviewOrigin, subviewSize, 0x777700FF);
 
-    addSubview(new Result(subviewGraphics));
+    addSubview(new Results(subviewGraphics));
     addSubview(new Rent(subviewGraphics));
     addSubview(new Upgrades(subviewGraphics));
     addSubview(new Staff(subviewGraphics));

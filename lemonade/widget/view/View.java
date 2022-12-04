@@ -25,6 +25,7 @@ public abstract class View extends GraphicObject {
   private TextGraphic[] _buttonTextGraphics;
   private DebugInfo _debugInfo;
   private ViewLayout _layout;
+  private String _name;
   private ArrayList<View> _subviews;
   private ArrayList<TextGraphic> _textGraphics;
   private ArrayList<TextVariable> _textVariables;
@@ -33,6 +34,7 @@ public abstract class View extends GraphicObject {
 
   public View(String name, GraphicLook graphicLook) {
     super(graphicLook);
+    setName(name);
     setButtons(new ArrayList<Button>(8));
     setSubviews(new ArrayList<View>(12));
     setTextGraphics(new ArrayList<TextGraphic>(8));
@@ -42,6 +44,7 @@ public abstract class View extends GraphicObject {
 
   public View(String name, GraphicLook graphicLook, Point debugInfoOffset) {
     super(graphicLook);
+    setName(name);
     setButtons(new ArrayList<Button>(8));
     setSubviews(new ArrayList<View>(8));
     setTextGraphics(new ArrayList<TextGraphic>(8));
@@ -65,6 +68,10 @@ public abstract class View extends GraphicObject {
 
   public DebugInfo getDebugInfo() {
     return this._debugInfo;
+  }
+
+  public String getName() {
+    return this._name;
   }
 
   public ArrayList<View> getSubviews() {
@@ -99,6 +106,10 @@ public abstract class View extends GraphicObject {
 
   public void setDebugInfo(DebugInfo value) {
     this._debugInfo = value;
+  }
+
+  public void setName(String value) {
+    this._name = value;
   }
 
   public void setSubviews(ArrayList<View> value) {
