@@ -3,10 +3,11 @@ package lemonade.singleton;
 import java.util.HashMap;
 
 import lemonade.Sketch;
+import lemonade.Util;
 import lemonade.enumeration.FontSizeType;
 import lemonade.enumeration.FontStyleType;
 import lemonade.enumeration.FontFaceType;
-import lemonade.widget.counter.DoubleCounter;
+import lemonade.widget.counter.FloatCounter;
 import lemonade.widget.counter.IntCounter;
 import lemonade.widget.view.View;
 import lemonade.widget.view.main.*;
@@ -22,6 +23,7 @@ public class GameManager {
   private static Order _order;
   private static int _presentedViewIndex;
   private static Recipe _recipe;
+  private static RunningCosts _runningCosts;
   private static Sketch _sketch;
   private static Supplies _supplies;
   private static Wallet _wallet;
@@ -31,9 +33,10 @@ public class GameManager {
   private GameManager() {
     setMainViews(new View[3]);
     setKeystrokesResponsiveness(true);
-    setRecipe(new Recipe(4, 2, 2));
-    setSupplies(new Supplies(0, 0, 0, 0));
-    setWallet(new Wallet(40.0));
+    setRecipe(new Recipe());
+    setRunningCosts(new RunningCosts());
+    setSupplies(new Supplies());
+    setWallet(new Wallet());
     setOrder(new Order());
   }
 
@@ -64,6 +67,10 @@ public class GameManager {
 
   public Recipe getRecipe() {
     return _recipe;
+  }
+
+  public RunningCosts getRunningCosts() {
+    return _runningCosts;
   }
 
   public Sketch getSketch() {
@@ -102,6 +109,10 @@ public class GameManager {
 
   public void setRecipe(Recipe value) {
     _recipe = value;
+  }
+
+  public void setRunningCosts(RunningCosts value) {
+    _runningCosts = value;
   }
 
   public void setSketch(Sketch value) {
@@ -162,7 +173,7 @@ public class GameManager {
     getSketch().textFont(font);
   }
 
-  public void setSketchTextFontAndScale(PFont font, float scale) {
+  public void setSketchTextFontAndScale(PFont font, double scale) {
     int newSize = (int)(font.getDefaultSize() * scale);
     getSketch().textFont(font, newSize);
   }
@@ -176,13 +187,15 @@ public class GameManager {
     private IntCounter _lemons;
     private IntCounter _sugar;
     private IntCounter _ice;
+    private FloatCounter _cupPrice;
 
     // Constructor
 
-    public Recipe(final int defaultLemonCount, final int defaultSugarCount, final int defaultIceCount) {
-      setLemons(new IntCounter(defaultLemonCount, 20));
-      setSugar(new IntCounter(defaultSugarCount, 10));
-      setIce(new IntCounter(defaultIceCount, 7));
+    public Recipe() {
+      setLemons(new IntCounter(Util.Values.DEFAULT_LEMON_RECIPE, Util.Values.MAX_LEMON_RECIPE));
+      setSugar(new IntCounter(Util.Values.DEFAULT_SUGAR_RECIPE, Util.Values.MAX_SUGAR_RECIPE));
+      setIce(new IntCounter(Util.Values.DEFAULT_ICE_RECIPE, Util.Values.MAX_ICE_RECIPE));
+      setCupPrice(new FloatCounter(Util.Values.DEFAULT_CUP_PRICE, Util.Values.MAX_CUP_PRICE));
     }
 
     // Getters
@@ -199,6 +212,10 @@ public class GameManager {
       return this._ice;
     }
 
+    public FloatCounter getCupPrice() {
+      return this._cupPrice;
+    }
+
     // Setters
 
     private void setLemons(IntCounter value) {
@@ -212,6 +229,22 @@ public class GameManager {
     private void setIce(IntCounter value) {
       this._ice = value;
     }
+
+    private void setCupPrice(FloatCounter value) {
+      this._cupPrice = value;
+    }
+  }
+
+  public class RunningCosts {
+
+    private float _rentCost;
+    private float _advertisementCost;
+    private float _hiringCost;
+
+    public RunningCosts() {
+
+    }
+
   }
 
   public class Order {
@@ -228,14 +261,14 @@ public class GameManager {
       setIceCounters(iceCounters);
       setCupsCounters(cupsCounters);
 
-      setTotal(new DoubleCounter(0, 999));
+      setTotal(new FloatCounter(0, 999));
     }
 
     private IntCounter[] _lemonCounters;
     private IntCounter[] _sugarCounters;
     private IntCounter[] _iceCounters;
     private IntCounter[] _cupsCounters;
-    private DoubleCounter _total;
+    private FloatCounter _total;
 
     public IntCounter[] getLemonCounters() {
       return this._lemonCounters;
@@ -253,7 +286,7 @@ public class GameManager {
       return this._cupsCounters;
     }
 
-    public DoubleCounter getTotal() {
+    public FloatCounter getTotal() {
       return this._total;
     }
 
@@ -273,7 +306,7 @@ public class GameManager {
       this._cupsCounters = value;
     }
 
-    private void setTotal(DoubleCounter value) {
+    private void setTotal(FloatCounter value) {
       this._total = value;
     }
 
@@ -307,11 +340,11 @@ public class GameManager {
 
     // Constructor
 
-    public Supplies(final int defaultLemons, final int defaultSugar, final int defaultIce, final int defaultCups) {
-      setLemons(new IntCounter(defaultLemons, 999));
-      setSugar(new IntCounter(defaultSugar, 999));
-      setIce(new IntCounter(defaultIce, 999));
-      setCups(new IntCounter(defaultCups, 999));
+    public Supplies() {
+      setLemons(new IntCounter(Util.Values.DEFAULT_LEMON_SUPPLIES, Util.Values.MAX_LEMON_SUPPLIES));
+      setSugar(new IntCounter(Util.Values.DEFAULT_SUGAR_SUPPLIES, Util.Values.MAX_SUGAR_SUPPLIES));
+      setIce(new IntCounter(Util.Values.DEFAULT_ICE_SUPPLIES, Util.Values.MAX_ICE_SUPPLIES));
+      setCups(new IntCounter(Util.Values.DEFAULT_CUP_SUPPLIES, Util.Values.MAX_CUP_SUPPLIES));
     }
 
     // Getters
@@ -356,23 +389,23 @@ public class GameManager {
 
     // Instance field
 
-    private DoubleCounter _cash;
+    private FloatCounter _cash;
 
     // Constructor
 
-    public Wallet(double defaultCash) {
-      setCash(new DoubleCounter(defaultCash, 100000.0));
+    public Wallet() {
+      setCash(new FloatCounter(Util.Values.DEFAULT_WALLET_CASH, Util.Values.MAX_WALLET_CASH));
     }
 
     // Getters
 
-    public DoubleCounter getCash() {
+    public FloatCounter getCash() {
       return this._cash;
     }
 
     // Setters
 
-    private void setCash(DoubleCounter value) {
+    private void setCash(FloatCounter value) {
       this._cash = value;
     }
 

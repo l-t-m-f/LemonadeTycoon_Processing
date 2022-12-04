@@ -16,6 +16,7 @@ import lemonade.widget.view.panel.Staff;
 import lemonade.widget.view.panel.Supplies;
 import lemonade.widget.view.panel.TopBar;
 import lemonade.widget.view.panel.Upgrades;
+import lemonade.widget.view.panel.Weather;
 
 import java.awt.Dimension;
 import java.awt.Point;
@@ -78,6 +79,12 @@ public class Prepare extends View {
     subviewGraphics = new GraphicLook(subviewOrigin, subviewSize, 0x777700FF);
 
     addSubview(new Animation(subviewGraphics));
+
+    subviewOrigin = new Point(677, 60);
+    subviewSize = new Dimension(528, 136);
+    subviewGraphics = new GraphicLook(subviewOrigin, subviewSize, 0x777700FF);
+
+    addSubview(new Weather(subviewGraphics));
 
     subviewOrigin = new Point(0, 0);
     subviewSize = new Dimension(GameManager.getInstance().getSketch().width, 40);

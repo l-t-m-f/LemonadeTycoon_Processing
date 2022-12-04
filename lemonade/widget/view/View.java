@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import lemonade.Util;
 import lemonade.enumeration.FontFaceType;
 import lemonade.enumeration.FontSizeType;
 import lemonade.enumeration.FontStyleType;
@@ -17,73 +16,65 @@ import lemonade.widget.text.TextVariable;
 
 public abstract class View extends GraphicObject {
 
-
   // Class fields
-
-  private final static int _marginH = 15;
-  private final static int _marginV = 15;
 
   // Instance fields
 
-  private DebugInfo _debugInfo;
-
+  private ArrayList<Button> _buttons;
   private Runnable[] _buttonCommands;
   private TextGraphic[] _buttonTextGraphics;
-  private ArrayList<Button> _buttons;
-
+  private DebugInfo _debugInfo;
+  private int[] _margins = new int[4];
+  private ArrayList<View> _subviews;
   private ArrayList<TextGraphic> _textGraphics;
   private ArrayList<TextVariable> _textVariables;
-
-  private ArrayList<View> _subviews;
 
   // Constructors
 
   public View(String name, GraphicLook graphicLook) {
     super(graphicLook);
+    setMargins(new int[] { 15, 15, 15, 15 });
     setButtons(new ArrayList<Button>(8));
-    setSubviews(new ArrayList<View>(8));
+    setSubviews(new ArrayList<View>(12));
     setTextGraphics(new ArrayList<TextGraphic>(8));
-    setTextVariables(new ArrayList<TextVariable>(8));   
+    setTextVariables(new ArrayList<TextVariable>(8));
     setDebugInfo(new DebugInfo(name, getGraphicLook().getPosition()));
   }
 
   public View(String name, GraphicLook graphicLook, Point debugInfoOffset) {
     super(graphicLook);
+    setMargins(new int[] { 15, 15, 15, 15 });
     setButtons(new ArrayList<Button>(8));
     setSubviews(new ArrayList<View>(8));
     setTextGraphics(new ArrayList<TextGraphic>(8));
-    setTextVariables(new ArrayList<TextVariable>(8));    
+    setTextVariables(new ArrayList<TextVariable>(8));
     setDebugInfo(new DebugInfo(name, debugInfoOffset));
   }
 
   // Getters
 
-  public DebugInfo getDebugInfo() {
-    return this._debugInfo;
-  }
-
   public ArrayList<Button> getButtons() {
     return this._buttons;
-  }
-
-  public ArrayList<View> getSubviews() {
-    return this._subviews;
-  }
-
-  public TextGraphic[] getButtonTextGraphics() {
-    return this._buttonTextGraphics;
   }
 
   public Runnable[] getButtonCommands() {
     return this._buttonCommands;
   }
 
-  public static int getMarginH() {
-    return _marginH;
+  public TextGraphic[] getButtonTextGraphics() {
+    return this._buttonTextGraphics;
   }
 
-  public static int getMarginV() {
-    return _marginV;
+  public DebugInfo getDebugInfo() {
+    return this._debugInfo;
+  }
+
+  public int[] getMargins() {
+    return this._margins;
+  }
+
+  public ArrayList<View> getSubviews() {
+    return this._subviews;
   }
 
   public ArrayList<TextGraphic> getTextGraphics() {
@@ -96,16 +87,8 @@ public abstract class View extends GraphicObject {
 
   // Setters
 
-  public void setDebugInfo(DebugInfo debugInfo) {
-    this._debugInfo = debugInfo;
-  }
-
   public void setButtons(ArrayList<Button> value) {
     this._buttons = value;
-  }
-
-  public void setSubviews(ArrayList<View> value) {
-    this._subviews = value;
   }
 
   public void setButtonTextGraphics(TextGraphic[] value) {
@@ -114,6 +97,18 @@ public abstract class View extends GraphicObject {
 
   public void setButtonCommands(Runnable[] value) {
     this._buttonCommands = value;
+  }
+
+  public void setDebugInfo(DebugInfo value) {
+    this._debugInfo = value;
+  }
+
+  public void setMargins(int[] value) {
+    _margins = value;
+  }
+
+  public void setSubviews(ArrayList<View> value) {
+    this._subviews = value;
   }
 
   public void setTextGraphics(ArrayList<TextGraphic> value) {
@@ -159,13 +154,14 @@ public abstract class View extends GraphicObject {
   protected void createButtons() {
   }
 
-  protected void createTextBlocks() {
+  protected void createTextGraphics() {
   }
 
   protected void createTextVariables() {
   }
 
-  protected void createStaticContent() { }
+  protected void createStaticContent() {
+  }
 
   protected void refreshTextVariables() {
   }
@@ -275,19 +271,20 @@ public abstract class View extends GraphicObject {
     }
 
     public void draw() {
-      
-      GameManager.getInstance().setSketchTextFont(GameManager.getInstance().getFont(FontFaceType.HACK, FontStyleType.BOLD, FontSizeType.SMALL));
+
+      GameManager.getInstance().setSketchTextFont(
+          GameManager.getInstance().getFont(FontFaceType.HACK, FontStyleType.BOLD, FontSizeType.SMALL));
       GameManager.getInstance().setSketchFill(255);
 
       int posX = getPosition().x;
       int posY = getPosition().y + 20;
 
-      GameManager.getInstance().printToScreen(getName(), posX, posY);
+      // GameManager.getInstance().printToScreen(getName(), posX, posY);
 
       int mouseDiffX = GameManager.getInstance().getSketch().mouseX - getPosition().x;
       int mouseDiffY = GameManager.getInstance().getSketch().mouseY - getPosition().y;
 
-      posY += Util.Values.TEXT_INTERLINE;
+      // posY += Util.Values.TEXT_INTERLINE;
 
       GameManager.getInstance().printToScreen(mouseDiffX + ", " + mouseDiffY, posX, posY);
     }

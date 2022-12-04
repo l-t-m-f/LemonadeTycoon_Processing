@@ -1,11 +1,15 @@
 package lemonade.widget.button;
 
 import lemonade.Util;
+import lemonade.enumeration.HireType;
 import lemonade.enumeration.LocationType;
+import lemonade.enumeration.UpgradeType;
 import lemonade.singleton.GameManager;
-import lemonade.widget.counter.DoubleCounter;
+import lemonade.widget.counter.FloatCounter;
 import lemonade.widget.counter.IntCounter;
+import lemonade.widget.view.inner.HireProfile;
 import lemonade.widget.view.inner.Locations;
+import lemonade.widget.view.inner.ShopUpgrade;
 import lemonade.widget.view.panel.Result;
 
 public class ButtonCommand {
@@ -137,6 +141,85 @@ public class ButtonCommand {
       GameManager.getInstance().getPresentedMainView().getSubview(6).showSubview(3);
     }
   }
+  
+  // Rent commands
+  
+  public static class PreviousLocation implements Runnable {
+    public void run() {
+      if(Locations.getPresentedLocationIndex() > 0) {
+        Locations.setPresentedLocationIndex(Locations.getPresentedLocationIndex() - 1);
+      }
+    }
+  }
+
+  public static class NextLocation implements Runnable {
+    public void run() {
+      if(Locations.getPresentedLocationIndex() < (LocationType.MAX_LOCATION_TYPE.ordinal() - 1)) {
+        Locations.setPresentedLocationIndex(Locations.getPresentedLocationIndex() + 1);
+      }
+    }
+  }
+
+  public static class RentLocation implements Runnable {
+    public void run() {
+      
+    }
+  }
+
+  // Upgrades commands
+
+  public static class PreviousUpgrade implements Runnable {
+    public void run() {
+      if(ShopUpgrade.getPresentedUpgradeIndex() > 0) {
+        ShopUpgrade.setPresentedUpgradeIndex(ShopUpgrade.getPresentedUpgradeIndex() - 1);
+      }
+    }
+  }
+
+  public static class NextUpgrade implements Runnable {
+    public void run() {
+      if(ShopUpgrade.getPresentedUpgradeIndex() < (UpgradeType.MAX_UPGRADE_TYPE.ordinal() - 1)) {
+        ShopUpgrade.setPresentedUpgradeIndex(ShopUpgrade.getPresentedUpgradeIndex() + 1);
+      }
+    }
+  }
+
+  public static class BuyUpgrade implements Runnable {
+    public void run() {
+      
+    }
+  }
+
+  // Staff commands
+
+  public static class PreviousHire implements Runnable {
+    public void run() {
+      if(HireProfile.getPresentedHireIndex() > 0) {
+        HireProfile.setPresentedHireIndex(HireProfile.getPresentedHireIndex() - 1);
+      }
+    }
+  }
+
+  public static class NextHire implements Runnable {
+    public void run() {
+      if(HireProfile.getPresentedHireIndex() < (HireType.MAX_HIRE_TYPE.ordinal() - 1)) {
+        HireProfile.setPresentedHireIndex(HireProfile.getPresentedHireIndex() + 1);
+      }
+    }
+  }
+
+  public static class Hire implements Runnable {
+    public void run() {
+      
+    }
+  }
+
+
+  // Marketing commands
+
+
+
+  // Recipe commands
 
   public static class AddLemonToRecipe implements Runnable {
     public void run() {
@@ -182,7 +265,7 @@ public class ButtonCommand {
 
   public static class AddLemonsToOrder12 implements Runnable {
     public void run() {
-      DoubleCounter currentTotal = GameManager.getInstance().getOrder().getTotal();
+      FloatCounter currentTotal = GameManager.getInstance().getOrder().getTotal();
       if (GameManager.getInstance().getWallet().hasEnoughFor(currentTotal.getCount() + Util.Values.LEMONS_COST_12)) {
         GameManager.getInstance().getOrder().getLemonCounters()[0].add(12);
         currentTotal.add(Util.Values.LEMONS_COST_12);
@@ -192,7 +275,7 @@ public class ButtonCommand {
 
   public static class AddLemonsToOrder24 implements Runnable {
     public void run() {
-      DoubleCounter currentTotal = GameManager.getInstance().getOrder().getTotal();
+      FloatCounter currentTotal = GameManager.getInstance().getOrder().getTotal();
       if (GameManager.getInstance().getWallet().hasEnoughFor(currentTotal.getCount() + Util.Values.LEMONS_COST_24)) {
         GameManager.getInstance().getOrder().getLemonCounters()[1].add(24);
         currentTotal.add(Util.Values.LEMONS_COST_24);
@@ -202,7 +285,7 @@ public class ButtonCommand {
 
   public static class AddLemonsToOrder48 implements Runnable {
     public void run() {
-      DoubleCounter currentTotal = GameManager.getInstance().getOrder().getTotal();
+      FloatCounter currentTotal = GameManager.getInstance().getOrder().getTotal();
       if (GameManager.getInstance().getWallet().hasEnoughFor(currentTotal.getCount() + Util.Values.LEMONS_COST_48)) {
         GameManager.getInstance().getOrder().getLemonCounters()[2].add(48);
         currentTotal.add(Util.Values.LEMONS_COST_48);
@@ -239,7 +322,7 @@ public class ButtonCommand {
 
   public static class BuyLemonOrder implements Runnable {
     public void run() {
-      double currentTotal = GameManager.getInstance().getOrder().getTotal().getCount();
+      float currentTotal = GameManager.getInstance().getOrder().getTotal().getCount();
     
       if (GameManager.getInstance().getWallet().hasEnoughFor(currentTotal)) {
         GameManager.getInstance().getWallet().getCash().subtract(currentTotal);
@@ -248,28 +331,6 @@ public class ButtonCommand {
           c.reset();
         }
       }
-    }
-  }
-  
-  public static class PreviousLocation implements Runnable {
-    public void run() {
-      if(Locations.getCurrentLocation() > 0) {
-        Locations.setCurrentLocation(Locations.getCurrentLocation() - 1);
-      }
-    }
-  }
-
-  public static class NextLocation implements Runnable {
-    public void run() {
-      if(Locations.getCurrentLocation() < (LocationType.LOCATION_TYPE_TOTAL.ordinal() - 1)) {
-        Locations.setCurrentLocation(Locations.getCurrentLocation() + 1);
-      }
-    }
-  }
-
-  public static class RentLocation implements Runnable {
-    public void run() {
-      
     }
   }
 

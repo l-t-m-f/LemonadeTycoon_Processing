@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 import lemonade.Util;
-import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
@@ -17,13 +16,16 @@ public class Staff extends View {
   public Staff(GraphicLook graphics) {
     super("Staff", graphics);
     setVisibility(false);
-    setButtonCommands(
-        new Runnable[] { new ButtonCommand.DoNothing(), new ButtonCommand.DoNothing(), new ButtonCommand.DoNothing() });
+    setButtonCommands(new Runnable[] {
+        new ButtonCommand.PreviousHire(),
+        new ButtonCommand.NextHire(),
+        new ButtonCommand.Hire()
+    });
     createButtons();
     createSubviews();
-    createTextBlocks();
+    createTextGraphics();
   }
-  
+
   // Getters
   // Setters
 
@@ -56,12 +58,13 @@ public class Staff extends View {
   }
 
   @Override
-  protected void createTextBlocks() {    
+  protected void createTextGraphics() {
     Point position1 = Util.addPoint(new Point(75, 32), getPosition());
     addTextBlock(new TextGraphic("Staff", position1));
 
     Point position2 = Util.addPoint(new Point(75, 55), getPosition());
-    TextGraphic textBlock = new TextGraphic("Hire the right person at the right time to send your sales through the roof.", position2);
+    TextGraphic textBlock = new TextGraphic(
+        "Hire the right person at the right time to send your sales through the roof.", position2);
     textBlock.setWrapBox(new Dimension(485, 85));
     addTextBlock(textBlock);
 

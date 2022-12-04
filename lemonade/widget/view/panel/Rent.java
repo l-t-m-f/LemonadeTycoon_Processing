@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 import lemonade.Util;
-import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
@@ -30,7 +29,7 @@ public class Rent extends View {
         });
     createButtons();
     createSubviews();
-    createTextBlocks();
+    createTextGraphics();
   }
 
   // Class methods
@@ -62,7 +61,7 @@ public class Rent extends View {
   }
 
   @Override
-  protected void createTextBlocks() {    
+  protected void createTextGraphics() {    
     Point position1 = Util.addPoint(new Point(75, 32), getPosition());
     addTextBlock(new TextGraphic("Locations", position1));
 

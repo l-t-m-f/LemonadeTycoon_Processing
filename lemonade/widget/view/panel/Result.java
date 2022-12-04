@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 import lemonade.Util;
-import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
@@ -71,7 +70,7 @@ public class Result extends View {
 
       Point buttonPosition = Util.addPoint(
         new Point(
-          getMarginH() + buttonOffsetH + ((buttonDimension.width + buttonSpacing) * i), 
+          getMargins()[0] + buttonOffsetH + ((buttonDimension.width + buttonSpacing) * i), 
           getComponentAnchorY() - marginV - buttonDimension.height
         ), 
         getPosition()
@@ -96,12 +95,12 @@ public class Result extends View {
 
     final int marginV = 35;
 
-    Point position = Util.addPoint(new Point(getMarginH(), getComponentAnchorY()), getPosition());
+    Point position = Util.addPoint(new Point(getMargins()[0], getComponentAnchorY()), getPosition());
     GraphicLook subsubviewGraphics = 
         new GraphicLook(
           position,
           new Dimension(
-            getRectangle().width - (getMarginH() * 2),
+            getRectangle().width - (getMargins()[0] * 2),
             getRectangle().height - getComponentAnchorY() - marginV),
           0x8000FFFF);
 

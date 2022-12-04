@@ -1,17 +1,23 @@
 package lemonade.widget.view.panel;
 
 import lemonade.Util;
-import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
 import lemonade.widget.text.TextGraphic;
+import lemonade.widget.text.TextVariable;
 import lemonade.widget.view.View;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.text.DecimalFormat;
 
 public class Marketing extends View {
-  
+
+  // Class fields
+
+  private static float _presentedCupPrice = 1.00f;
+  private static float _presentedAdvertisementCost = 0.00f;
+
   // Instance fields
   // None
 
@@ -20,14 +26,37 @@ public class Marketing extends View {
   public Marketing(GraphicLook graphics) {
     super("Marketing", graphics);
     setVisibility(false);
-    setButtonCommands(new Runnable[] { new ButtonCommand.DoNothing(), new ButtonCommand.DoNothing() });
+    setButtonCommands(new Runnable[] {
+        new ButtonCommand.DoNothing(),
+        new ButtonCommand.DoNothing()
+    });
     createButtons();
     createSubviews();
-    createTextBlocks();
+    createTextGraphics();
     createTextVariables();
   }
 
-  // Class fields
+  // Getters
+
+  public float getPresentedCupPrice() {
+    return _presentedCupPrice;
+  }
+
+  public float getPresentedAdvertisementCost() {
+    return _presentedAdvertisementCost;
+  }
+
+  // Setters
+
+  public void setPresentedCupPrice(float value) {
+    _presentedCupPrice = value;
+  }
+
+  public void setPresentedAdvertisementCost(float value) {
+    _presentedAdvertisementCost = value;
+  }
+
+  // Class methods
 
   @Override
   protected void createButtons() {
@@ -54,34 +83,55 @@ public class Marketing extends View {
   }
 
   @Override
-  protected void createTextBlocks() {
+  protected void createTextGraphics() {
+
+    createCupPriceTextGraphics();
+    createAdvertisementTextGraphics();
+  }
+
+  private void createCupPriceTextGraphics() {
     int textHeight = 17;
-    Point position1 = Util.addPoint(new Point(getMarginH(), (getMarginV() + textHeight)), getPosition());
+    Point position1 = Util.addPoint(new Point(getMargins()[0], (getMargins()[1] + textHeight)), getPosition());
     addTextBlock(new TextGraphic("Price", position1));
 
-    Point position2 = Util.addPoint(new Point(getMarginH(), 55), getPosition());
+    Point position2 = Util.addPoint(new Point(getMargins()[0], 55), getPosition());
     TextGraphic preparedTextBlock1 = new TextGraphic(
         "Skills, instinct, judgement, luck... Do you have what it takes to set the perfect price?", position2);
     preparedTextBlock1.setWrapBox(new Dimension(485, 85));
     addTextBlock(preparedTextBlock1);
+  }
 
-    Point position3 = Util.addPoint(new Point(getMarginH(), 232), getPosition());
+  private void createAdvertisementTextGraphics() {
+    Point position3 = Util.addPoint(new Point(getMargins()[0], 232), getPosition());
     addTextBlock(new TextGraphic("Advertising", position3));
 
-    Point position4 = Util.addPoint(new Point(getMarginH(), 255), getPosition());
+    Point position4 = Util.addPoint(new Point(getMargins()[0], 255), getPosition());
     TextGraphic preparedTextBlock2 = new TextGraphic(
         "When your reputation needs a little boost, spending a few dollars here can really make the difference by attracting more customers to your stand.",
         position4);
+    preparedTextBlock2.setWrapBox(new Dimension(485, 85));
     addTextBlock(preparedTextBlock2);
   }
 
   @Override
   protected void createTextVariables() {
 
+    int countersMarginLeft = 50;
+    int priceCounterMarginTop = 30;
+    int advertisementCounterMarginTop = 30;
+
+    Point priceCounterPosition = Util.addPoint(new Point(countersMarginLeft, priceCounterMarginTop), getPosition());
+    Point advertisementCounterPosition = Util.addPoint(new Point(countersMarginLeft, advertisementCounterMarginTop),
+        getPosition());
+
+    addTextVariable(new TextVariable(priceCounterPosition));
+    addTextVariable(new TextVariable(advertisementCounterPosition));
+
   }
 
   @Override
   protected void refreshTextVariables() {
-    
+    DecimalFormat df = new DecimalFormat("0.00");
+    updateTextVariable(0, df.format(getPresentedCupPrice()));
   }
 }

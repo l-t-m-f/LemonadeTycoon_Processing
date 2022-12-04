@@ -4,7 +4,7 @@ public enum ButtonStateType {
   IDLE(0),
   HOVERED(1),
   PRESSED(2),
-  MAX_BUTTON_STATE(3);
+  MAX_BUTTON_STATE_TYPE(3);
   
   private final int _value;
   

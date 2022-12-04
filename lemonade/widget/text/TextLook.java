@@ -10,11 +10,11 @@ public class TextLook {
     // Instance fields
     private int _color;
     private PFont _font;
-    private float _scale;
+    private double _scale;
 
     // Constructor(s)
 
-    public TextLook(PFont font, int color, float scale) {
+    public TextLook(PFont font, int color, double scale) {
         setFont(font);
         setColor(color);
         setScale(scale);
@@ -30,7 +30,7 @@ public class TextLook {
         return this._font;
     }
 
-    public float getScale() {
+    public double getScale() {
         return this._scale;
     }
 
@@ -44,7 +44,7 @@ public class TextLook {
         this._font = value;
     }
 
-    public void setScale(float value) {
+    public void setScale(double value) {
         this._scale = value;
     }
 

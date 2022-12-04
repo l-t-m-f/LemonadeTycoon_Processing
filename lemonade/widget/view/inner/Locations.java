@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import lemonade.Util;
 import lemonade.enumeration.LocationType;
-import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
@@ -18,14 +17,13 @@ public class Locations extends View {
 
   // Class fields
 
-  private static int _currentLocation;
+  private static int _presentedLocationIndex = 0;
   private static ArrayList<Location> _locations = new ArrayList<>(10);
 
   // Constructor(s)
 
   public Locations(GraphicLook graphicLook) {
     super("Locations", graphicLook);
-    setCurrentLocation(0);
     setButtonCommands(new Runnable[] { new ButtonCommand.DoNothing() });
     setVisibility(true);
     createButtons();
@@ -35,8 +33,8 @@ public class Locations extends View {
 
   // Getters
 
-  public static int getCurrentLocation() {
-    return _currentLocation;
+  public static int getPresentedLocationIndex() {
+    return _presentedLocationIndex;
   }
 
   public ArrayList<Location> getLocations() {
@@ -45,8 +43,8 @@ public class Locations extends View {
 
   // Setters
 
-  public static void setCurrentLocation(int value) {
-    _currentLocation = value;
+  public static void setPresentedLocationIndex(int value) {
+    _presentedLocationIndex = value;
   }
 
   // Class methods
@@ -75,27 +73,28 @@ public class Locations extends View {
     getLocations().add(new Location(LocationType.HEXA_STAD));
   }
 
-  protected void createTextBlocks() {}
+  protected void createTextGraphics() {
+  }
 
   @Override
   protected void createTextVariables() {
-  
-      Point titlePosition = Util.addPoint(new Point(170, 15), getPosition());
-      addTextVariable(new TextVariable(titlePosition));
 
-      Point taglinePosition = Util.addPoint(new Point(170, 35), getPosition());
-      addTextVariable(new TextVariable(taglinePosition));
-      getTextVariable(1).setWrapBox(new Dimension(200, 80));
+    Point titlePosition = Util.addPoint(new Point(170, 15), getPosition());
+    addTextVariable(new TextVariable(titlePosition));
 
-      Point pricePosition = Util.addPoint(new Point(332, 168), getPosition());
-      addTextVariable(new TextVariable(pricePosition));
+    Point taglinePosition = Util.addPoint(new Point(170, 35), getPosition());
+    addTextVariable(new TextVariable(taglinePosition));
+    getTextVariable(1).setWrapBox(new Dimension(200, 80));
+
+    Point pricePosition = Util.addPoint(new Point(332, 168), getPosition());
+    addTextVariable(new TextVariable(pricePosition));
   }
 
   @Override
   protected void refreshTextVariables() {
-    updateTextVariable(0, "" + getLocations().get(getCurrentLocation()).getTitle());
-    updateTextVariable(1, "" + getLocations().get(getCurrentLocation()).getTagline());
-    updateTextVariable(2, "$ " + getLocations().get(getCurrentLocation()).getPrice());
+    updateTextVariable(0, "" + getLocations().get(getPresentedLocationIndex()).getTitle());
+    updateTextVariable(1, "" + getLocations().get(getPresentedLocationIndex()).getTagline());
+    updateTextVariable(2, "$ " + getLocations().get(getPresentedLocationIndex()).getPrice());
   }
 
   // Inner classes
@@ -109,19 +108,19 @@ public class Locations extends View {
     private String _longdesc = "";
     private double _popularity = -1.0;
     private double _satisfaction = -1.0;
-    private double _price = -1.0;
+    private float _price = -1.0f;
     private PImage _image;
 
     // Constructor(s)
 
     public Location(LocationType locationType) {
-      
+
       setTitle(Util.Values.LocationTitles.get(locationType));
       setTagline(Util.Values.LocationTaglines.get(locationType));
 
       setPopularity(Util.Values.LocationPopularity.get(locationType).doubleValue());
       setSatisfaction(Util.Values.LocationSatisfaction.get(locationType).doubleValue());
-      setPrice(Util.Values.LocationPrice.get(locationType).doubleValue());
+      setPrice(Util.Values.LocationPrice.get(locationType).floatValue());
     }
 
     // Getters
@@ -146,7 +145,7 @@ public class Locations extends View {
       return this._satisfaction;
     }
 
-    public double getPrice() {
+    public float getPrice() {
       return this._price;
     }
 
@@ -176,7 +175,7 @@ public class Locations extends View {
       this._satisfaction = value;
     }
 
-    private void setPrice(double value) {
+    private void setPrice(float value) {
       this._price = value;
     }
 

@@ -22,7 +22,7 @@ public class ShopLemons extends View {
     });
     setVisibility(true);
     createButtons();
-    createTextBlocks();
+    createTextGraphics();
     createTextVariables();
   }
 
@@ -46,7 +46,7 @@ public class ShopLemons extends View {
 
   }
 
-  protected void createTextBlocks() {
+  protected void createTextGraphics() {
 
     int startingX = 64;
     int startingY = 39;

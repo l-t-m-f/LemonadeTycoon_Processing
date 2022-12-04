@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 import lemonade.Util;
-import lemonade.singleton.GameManager;
 import lemonade.widget.GraphicLook;
 import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
@@ -23,10 +22,13 @@ public class Upgrades extends View {
     super("Upgrades", graphics);
     setVisibility(false);
     setButtonCommands(
-        new Runnable[] { new ButtonCommand.DoNothing(), new ButtonCommand.DoNothing(), new ButtonCommand.DoNothing() });
+        new Runnable[] { 
+          new ButtonCommand.PreviousUpgrade(), 
+          new ButtonCommand.NextUpgrade(), 
+          new ButtonCommand.BuyUpgrade() });
     createButtons();
     createSubviews();
-    createTextBlocks();
+    createTextGraphics();
   }
   
   // Getters
@@ -61,7 +63,7 @@ public class Upgrades extends View {
   }
 
   @Override
-  protected void createTextBlocks() {    
+  protected void createTextGraphics() {    
     Point position1 = Util.addPoint(new Point(75, 32), getPosition());
     addTextBlock(new TextGraphic("Upgrades", position1));
 

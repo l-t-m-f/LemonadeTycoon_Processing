@@ -23,7 +23,7 @@ public class Recipe extends View {
     });
     createButtons();
     createSubviews();
-    createTextBlocks();
+    createTextGraphics();
     createTextVariables();
   }
 
@@ -43,7 +43,7 @@ public class Recipe extends View {
     }
   }
 
-  protected void createTextBlocks() {
+  protected void createTextGraphics() {
 
     Point position1 = Util.addPoint(new Point(75, 32), getPosition());
     addTextBlock(new TextGraphic("Recipe", position1));

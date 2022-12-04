@@ -11,5 +11,5 @@ public enum LocationType {
     OLD_SQUARE(),
     MAGIC_GARDENS(),
     HEXA_STAD(),
-    LOCATION_TYPE_TOTAL();
+    MAX_LOCATION_TYPE();
 }
