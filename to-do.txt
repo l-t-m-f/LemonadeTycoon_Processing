@@ -1,2 +1,0 @@
-- In View remove the Offset from the constructor
-- Change the Origin of GraphicLook for an Offset (since all origins are 0,0 in current system)
