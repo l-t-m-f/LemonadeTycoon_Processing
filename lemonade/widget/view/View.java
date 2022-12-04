@@ -24,7 +24,7 @@ public abstract class View extends GraphicObject {
   private Runnable[] _buttonCommands;
   private TextGraphic[] _buttonTextGraphics;
   private DebugInfo _debugInfo;
-  private int[] _margins = new int[4];
+  private ViewLayout _layout;
   private ArrayList<View> _subviews;
   private ArrayList<TextGraphic> _textGraphics;
   private ArrayList<TextVariable> _textVariables;
@@ -33,7 +33,6 @@ public abstract class View extends GraphicObject {
 
   public View(String name, GraphicLook graphicLook) {
     super(graphicLook);
-    setMargins(new int[] { 15, 15, 15, 15 });
     setButtons(new ArrayList<Button>(8));
     setSubviews(new ArrayList<View>(12));
     setTextGraphics(new ArrayList<TextGraphic>(8));
@@ -43,7 +42,6 @@ public abstract class View extends GraphicObject {
 
   public View(String name, GraphicLook graphicLook, Point debugInfoOffset) {
     super(graphicLook);
-    setMargins(new int[] { 15, 15, 15, 15 });
     setButtons(new ArrayList<Button>(8));
     setSubviews(new ArrayList<View>(8));
     setTextGraphics(new ArrayList<TextGraphic>(8));
@@ -69,10 +67,6 @@ public abstract class View extends GraphicObject {
     return this._debugInfo;
   }
 
-  public int[] getMargins() {
-    return this._margins;
-  }
-
   public ArrayList<View> getSubviews() {
     return this._subviews;
   }
@@ -83,6 +77,10 @@ public abstract class View extends GraphicObject {
 
   public ArrayList<TextVariable> getTextVariables() {
     return this._textVariables;
+  }
+
+  public ViewLayout getLayout() {
+    return this._layout;
   }
 
   // Setters
@@ -103,10 +101,6 @@ public abstract class View extends GraphicObject {
     this._debugInfo = value;
   }
 
-  public void setMargins(int[] value) {
-    _margins = value;
-  }
-
   public void setSubviews(ArrayList<View> value) {
     this._subviews = value;
   }
@@ -117,6 +111,10 @@ public abstract class View extends GraphicObject {
 
   public void setTextVariables(ArrayList<TextVariable> value) {
     this._textVariables = value;
+  }
+
+  public void setLayout(ViewLayout value) {
+    this._layout = value;
   }
 
   // Mixin
@@ -164,6 +162,10 @@ public abstract class View extends GraphicObject {
   }
 
   protected void refreshTextVariables() {
+  }
+
+  protected void configureLayout() {
+  
   }
 
   public View getSubview(int index) {

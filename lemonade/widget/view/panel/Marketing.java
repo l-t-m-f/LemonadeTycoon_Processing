@@ -7,6 +7,8 @@ import lemonade.widget.button.ButtonCommand;
 import lemonade.widget.text.TextGraphic;
 import lemonade.widget.text.TextVariable;
 import lemonade.widget.view.View;
+import lemonade.widget.view.ViewLayout;
+
 import java.awt.Dimension;
 import java.awt.Point;
 import java.text.DecimalFormat;
@@ -30,6 +32,7 @@ public class Marketing extends View {
         new ButtonCommand.DoNothing(),
         new ButtonCommand.DoNothing()
     });
+    configureLayout();
     createButtons();
     createSubviews();
     createTextGraphics();
@@ -57,6 +60,13 @@ public class Marketing extends View {
   }
 
   // Class methods
+
+  @Override
+  protected void configureLayout() {
+    setLayout(new ViewLayout(2, 2, 2, 0, 1, 3, 1));
+    getLayout().setHeaderGroupMargins(0, 15, 15);
+    getLayout().setHeaderGroupMargins(1, 15, 232);
+  }
 
   @Override
   protected void createButtons() {
@@ -90,11 +100,11 @@ public class Marketing extends View {
   }
 
   private void createCupPriceTextGraphics() {
-    int textHeight = 17;
-    Point position1 = Util.addPoint(new Point(getMargins()[0], (getMargins()[1] + textHeight)), getPosition());
+
+    Point position1 = Util.addPoint(new Point(getLayout().getButtonMarginLeft(0), getLayout().getButtonMarginTop(0)), getPosition());
     addTextBlock(new TextGraphic("Price", position1));
 
-    Point position2 = Util.addPoint(new Point(getMargins()[0], 55), getPosition());
+    Point position2 = Util.addPoint(new Point(getLayout().getButtonMarginLeft(0), 55), getPosition());
     TextGraphic preparedTextBlock1 = new TextGraphic(
         "Skills, instinct, judgement, luck... Do you have what it takes to set the perfect price?", position2);
     preparedTextBlock1.setWrapBox(new Dimension(485, 85));
@@ -102,10 +112,10 @@ public class Marketing extends View {
   }
 
   private void createAdvertisementTextGraphics() {
-    Point position3 = Util.addPoint(new Point(getMargins()[0], 232), getPosition());
+    Point position3 = Util.addPoint(new Point(getLayout().getButtonMarginLeft(1), getLayout().getButtonMarginTop(1)), getPosition());
     addTextBlock(new TextGraphic("Advertising", position3));
 
-    Point position4 = Util.addPoint(new Point(getMargins()[0], 255), getPosition());
+    Point position4 = Util.addPoint(new Point(getLayout().getButtonMarginLeft(1), 255), getPosition());
     TextGraphic preparedTextBlock2 = new TextGraphic(
         "When your reputation needs a little boost, spending a few dollars here can really make the difference by attracting more customers to your stand.",
         position4);

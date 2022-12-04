@@ -9,6 +9,7 @@ import lemonade.widget.button.Button;
 import lemonade.widget.button.ButtonCommand;
 import lemonade.widget.text.TextVariable;
 import lemonade.widget.view.View;
+import lemonade.widget.view.ViewLayout;
 import lemonade.widget.view.inner.BalanceSheet;
 import lemonade.widget.view.inner.Charts;
 import lemonade.widget.view.inner.ProfitLoss;
@@ -19,7 +20,6 @@ public class Result extends View {
   // Class fields
 
   private static String _presentedInnerViewName = "Charts";
-  private final static int _componentAnchorY = 196;
 
   // Instance fields
   // None
@@ -35,16 +35,13 @@ public class Result extends View {
         new ButtonCommand.ShowBalanceSheet()
     });
     setVisibility(true);
+    configureLayout();
     createButtons();
     createSubviews();
     createTextVariables();
   }
 
   // Getters
-
-  public static int getComponentAnchorY() {
-    return _componentAnchorY;
-  }
 
   public static String getPresentedInnerViewName() {
     return _presentedInnerViewName;
@@ -59,21 +56,26 @@ public class Result extends View {
   // Class methods
 
   @Override
+  protected void configureLayout() {
+    setLayout(new ViewLayout(1, 0, 1, 0, 1, 3, 1));
+    getLayout().setButtonGroupMargins(0, 235, 191);
+    getLayout().setButtonGroupSpacing(0, 15, 0);
+    getLayout().setHeaderGroupMargins(0, 15, 15);
+    getLayout().setSubviewGroupMargins(0, 15, 196);
+  }
+
+  @Override
   protected void createButtons() {
 
-    final int marginV = 5;
-    final int buttonOffsetH = 220;
-    final int buttonSpacing = 15;
     final Dimension buttonDimension = new Dimension(65, 40);
 
     for (int i = 0; i < 4; i++) {
 
       Point buttonPosition = Util.addPoint(
         new Point(
-          getMargins()[0] + buttonOffsetH + ((buttonDimension.width + buttonSpacing) * i), 
-          getComponentAnchorY() - marginV - buttonDimension.height
-        ), 
-        getPosition()
+          getLayout().getButtonMarginLeft(0) + ((buttonDimension.width + getLayout().getButtonHorizontalSpacing(0)) * i), 
+          getLayout().getButtonMarginTop(0) - buttonDimension.height
+        ), getPosition()
       );
 
       addButton(
@@ -93,15 +95,13 @@ public class Result extends View {
   @Override
   protected void createSubviews() {
 
-    final int marginV = 35;
-
-    Point position = Util.addPoint(new Point(getMargins()[0], getComponentAnchorY()), getPosition());
+    Point position = Util.addPoint(new Point(getLayout().getSubviewMarginLeft(0), getLayout().getSubviewMarginTop(0)), getPosition());
     GraphicLook subsubviewGraphics = 
         new GraphicLook(
           position,
           new Dimension(
-            getRectangle().width - (getMargins()[0] * 2),
-            getRectangle().height - getComponentAnchorY() - marginV),
+            getRectangle().width - (getLayout().getSubviewMarginLeft(0) * 2),
+            getRectangle().height - getLayout().getSubviewMarginTop(0) - 35),
           0x8000FFFF);
 
     addSubview(new Charts(subsubviewGraphics));
